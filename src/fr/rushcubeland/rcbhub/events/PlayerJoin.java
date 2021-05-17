@@ -1,5 +1,6 @@
 package fr.rushcubeland.rcbhub.events;
 
+import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.rcbapi.RcbAPI;
 import fr.rushcubeland.rcbapi.rank.RankUnit;
 import fr.rushcubeland.rcbapi.tools.ItemBuilder;
@@ -29,19 +30,18 @@ public class PlayerJoin implements Listener {
         RcbAPI.getInstance().getTablist().sendTabList(player);
         initScoreboardPlayer(player);
         giveJoinItems(player);
-        RcbAPI.getInstance().getAccountCallback(player, account -> {
-            RankUnit rank = account.getRank();
-            if(rank.getPower() <= 45){
-                e.setJoinMessage(rank.getPrefix() + player.getDisplayName() + " §ba rejoin le Lobby !");
-            }
-            else {
-                e.setJoinMessage(null);
+        Account account = RcbAPI.getInstance().getAccount(player);
+        RankUnit rank = account.getRank();
+        if(rank.getPower() <= 45){
+            e.setJoinMessage(rank.getPrefix() + player.getDisplayName() + " §ba rejoin le Lobby !");
+        }
+        else {
+            e.setJoinMessage(null);
 
-            }
-            initFlyPlayer(player, rank);
-            initRankPlayerPermissions(player, rank);
-            RcbAPI.getInstance().getTablist().setTabListPlayer(player);
-        });
+        }
+        initFlyPlayer(player, rank);
+        initRankPlayerPermissions(player, rank);
+        RcbAPI.getInstance().getTablist().setTabListPlayer(player);
     }
 
     private void initFlyPlayer(Player player, RankUnit rank){

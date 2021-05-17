@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class RcbHub extends JavaPlugin {
 
     private static RcbHub instance;
-    private String channel = "rcbproxy:main";
+    private final String channel = "rcbproxy:main";
 
     @Override
     public void onEnable() {
@@ -55,7 +55,7 @@ public class RcbHub extends JavaPlugin {
     }
 
     private void reloadScoreboardTask(){
-        ScoreboardReloadTask reloadTask = new ScoreboardReloadTask(this);
+        ScoreboardReloadTask reloadTask = new ScoreboardReloadTask();
         reloadTask.runTaskTimer(this, 0L, 40L);
     }
 

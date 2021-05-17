@@ -1,5 +1,6 @@
 package fr.rushcubeland.rcbhub.gui;
 
+import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.rcbapi.RcbAPI;
 import fr.rushcubeland.rcbapi.tools.ItemBuilder;
 import org.bukkit.Bukkit;
@@ -33,27 +34,25 @@ public class MenuPrincipal {
         ItemStack db = new ItemBuilder(Material.BEACON).setName("§6DeterrentBorder §f[CASUAL]").toItemStack();
         inventory.setItem(21, db);
 
-        RcbAPI.getInstance().getAccountCallback(player, account -> {
+        Account account = RcbAPI.getInstance().getAccount(player);
 
-            final ItemStack headp;
+        final ItemStack headp;
 
-            if(account.getRank().getPrefix().equals("")){
-                headp = new ItemBuilder(Material.PLAYER_HEAD).setName("§6Informations:").setLore("§c ", "§fGrade: §7[Joueur]" , "§fCoins: §c" + account.getCoins() + " §e⛁", "§fPalier Pass de combat: §a14", "§f   ", "§aPlus d'avantages ?", "§ehttps://store.rushcubeland.fr").toItemStack();
-            }
-            else
-            {
-                headp = new ItemBuilder(Material.PLAYER_HEAD).setName("§6Informations:").setLore("§c ", "§fGrade: " + account.getRank().getPrefix(), "§fCoins: §c" + account.getCoins() + " §e⛁", "§fPalier Pass de combat: §a14", "§f   ", "§aPlus d'avantages ?", "§ehttps://store.rushcubeland.fr").toItemStack();
-            }
+        if(account.getRank().getPrefix().equals("")){
+            headp = new ItemBuilder(Material.PLAYER_HEAD).setName("§6Informations:").setLore("§c ", "§fGrade: §7[Joueur]" , "§fCoins: §c" + account.getCoins() + " §e⛁", "§fPalier Pass de combat: §a14", "§f   ", "§aPlus d'avantages ?", "§ehttps://store.rushcubeland.fr").toItemStack();
+        }
+        else
+        {
+            headp = new ItemBuilder(Material.PLAYER_HEAD).setName("§6Informations:").setLore("§c ", "§fGrade: " + account.getRank().getPrefix(), "§fCoins: §c" + account.getCoins() + " §e⛁", "§fPalier Pass de combat: §a14", "§f   ", "§aPlus d'avantages ?", "§ehttps://store.rushcubeland.fr").toItemStack();
+        }
 
-            SkullMeta headpm = (SkullMeta) headp.getItemMeta();
-            headpm.setOwningPlayer(player);
-            headp.setItemMeta(headpm);
-            inventory.setItem(27, headp);
+        SkullMeta headpm = (SkullMeta) headp.getItemMeta();
+        headpm.setOwningPlayer(player);
+        headp.setItemMeta(headpm);
+        inventory.setItem(27, headp);
 
 
-                });
-
-        ItemStack jump = new ItemBuilder(Material.GOLDEN_BOOTS).setName("§bParcours").setLore("§b ","§7Saute de bloc en bloc pour terminer le parcours", "§4 ", "§e➤ Se teleporter").toItemStack();
+        ItemStack jump = new ItemBuilder(Material.GOLDEN_BOOTS).setName("§bParcours").setLore("§b ","§7Saute de bloc en bloc pour terminer le parcours", "§4 ", "§e➤ Se teleporter").removeFlags().toItemStack();
         inventory.setItem(35, jump);
 
         ItemStack info = new ItemBuilder(Material.COMPASS).setName("§6Hub").setLore(" ", "§7Le hub est le lieu principal du serveur,", "§7il vous permet de vous amuser avec vos amis,", "§7d'explorer ses divers endroits ou de vous poser", "§7à coté de l'eau", " ", "§f➤ Il y a §e" + Bukkit.getOnlinePlayers().size() + " §fjoueurs sur le hub").toItemStack();

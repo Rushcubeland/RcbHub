@@ -17,16 +17,13 @@ import java.util.Map;
 
 public class ScoreboardReloadTask extends BukkitRunnable {
 
-    private RcbHub rcbHub;
-
-    public ScoreboardReloadTask(RcbHub rcbHub) {
-        this.rcbHub = rcbHub;
-    }
-
     @Override
     public void run() {
         for(Map.Entry<Player, ScoreboardSign> sign : RcbAPI.getInstance().boards.entrySet()){
             Player player = sign.getKey();
+            if(player == null){
+                return;
+            }
             Bukkit.getScheduler().runTaskAsynchronously(RcbHub.getInstance(), () -> {
 
                 final RedissonClient redissonClient = RedisAccess.INSTANCE.getRedissonClient();
@@ -36,7 +33,7 @@ public class ScoreboardReloadTask extends BukkitRunnable {
                 final Account account = accountRBucket.get();
 
                 sign.getValue().setLine(0, "§f ");
-                sign.getValue().setLine(1, "§fCompte: " + account.getRank().getPrefix() + ChatColor.WHITE + player.getDisplayName());
+                sign.getValue().setLine(1, "§fCompte: " + account.getRank().getPrefix() + player.getDisplayName());
                 sign.getValue().setLine(2, "§c ");
                 sign.getValue().setLine(3, "§fCoins: " + ChatColor.RED + account.getCoins() + " " + ChatColor.YELLOW + "⛁");
                 sign.getValue().setLine(4, "§7 ");
@@ -44,7 +41,7 @@ public class ScoreboardReloadTask extends BukkitRunnable {
                 sign.getValue().setLine(6, "§b ");
                 sign.getValue().setLine(7, "§fJoueurs en ligne: §7" + Network.getNetworkSlots());
                 sign.getValue().setLine(8, "§4 ");
-                sign.getValue().setLine(9,  ChatColor.YELLOW + "play.rushcubel" + ChatColor.YELLOW + "and.fr");
+                sign.getValue().setLine(9,  ChatColor.YELLOW + "play.rushcubeland.fr");
 
             });
         }
