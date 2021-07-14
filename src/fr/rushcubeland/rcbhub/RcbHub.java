@@ -22,12 +22,12 @@ public class RcbHub extends JavaPlugin {
 
         reloadScoreboardTask();
 
-        RcbHub.getInstance().getLogger().info("[RcbHub] Plugin enabled");
+        RcbHub.getInstance().getLogger().info("Plugin enabled");
     }
 
     @Override
     public void onDisable() {
-        RcbHub.getInstance().getLogger().info("[RcbHub] Plugin disabled");
+        RcbHub.getInstance().getLogger().info("Plugin disabled");
         instance = null;
     }
 

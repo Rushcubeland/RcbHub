@@ -1,5 +1,6 @@
 package fr.rushcubeland.rcbhub.parcours;
 
+import fr.rushcubeland.commons.AStats;
 import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.rcbapi.RcbAPI;
 import fr.rushcubeland.rcbapi.tools.ItemBuilder;
@@ -27,6 +28,7 @@ public class Parcours {
             if(!Parcours.getParcoursDataPlayers().containsKey(player)){
                 Parcours.getParcoursDataPlayers().put(player, CheckPointUnit.START);
                 ParcoursTask.startParcoursTask(player, 1);
+                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1F, 1F);
                 player.getInventory().clear();
                 player.setFlying(false);
                 player.setAllowFlight(false);
@@ -54,9 +56,19 @@ public class Parcours {
             }
 
         }
-        else if(CheckPointUnit.locationMatch(CheckPointUnit.END, blockLocation)){
+        else if(CheckPointUnit.locationMatch(CheckPointUnit.THIRD_CHECKPOINT, blockLocation)){
             if(Parcours.getParcoursDataPlayers().containsKey(player)){
                 if(Parcours.getParcoursDataPlayers().get(player).equals(CheckPointUnit.SND_CHECKPOINT)){
+                    Parcours.getParcoursDataPlayers().put(player, CheckPointUnit.THIRD_CHECKPOINT);
+                    player.sendMessage("§eVous avez passé " + CheckPointUnit.THIRD_CHECKPOINT.getName());
+                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1F, 1F);
+                }
+            }
+
+        }
+        else if(CheckPointUnit.locationMatch(CheckPointUnit.END, blockLocation)){
+            if(Parcours.getParcoursDataPlayers().containsKey(player)){
+                if(Parcours.getParcoursDataPlayers().get(player).equals(CheckPointUnit.THIRD_CHECKPOINT)){
                     Parcours.getParcoursDataPlayers().remove(player);
                     ParcoursTask.stopParcoursTask(player);
                     long timer = getParcoursTimersPlayers().get(player);
@@ -70,6 +82,13 @@ public class Parcours {
                     player.teleport(LocationUnit.LOBBY.getLocation());
                     PlayerJoin.initFlyPlayer(player, account.getRank());
                     PlayerJoin.giveJoinItems(player);
+                    AStats aStats = RcbAPI.getInstance().getAccountStats(player);
+                    long currentTimer = aStats.getParcoursTimer();
+                    if(currentTimer < timer){
+                        player.sendMessage("§6Félicitations, Vous avez battu votre §crecord personnel !");
+                        aStats.setParcoursTimer(timer);
+                        RcbAPI.getInstance().sendAStatsToRedis(aStats);
+                    }
                 }
             }
 

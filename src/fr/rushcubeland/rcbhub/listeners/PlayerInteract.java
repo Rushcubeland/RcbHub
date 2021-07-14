@@ -5,6 +5,7 @@ import fr.rushcubeland.rcbapi.RcbAPI;
 import fr.rushcubeland.rcbapi.tools.ItemBuilder;
 import fr.rushcubeland.rcbhub.RcbHub;
 import fr.rushcubeland.rcbhub.gui.MenuPrincipal;
+import fr.rushcubeland.rcbhub.gui.MenuStats;
 import fr.rushcubeland.rcbhub.locations.LocationUnit;
 import fr.rushcubeland.rcbhub.messaging.BukkitSend;
 import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
@@ -49,13 +50,16 @@ public class PlayerInteract implements Listener {
             if(current.getType().equals(Material.SLIME_BALL)){
                 if(Parcours.getParcoursDataPlayers().containsKey(player)){
                     CheckPointUnit checkPointUnit = Parcours.getParcoursDataPlayers().get(player);
-                    Location location = new Location(Bukkit.getWorld("Lobby"), checkPointUnit.getX(), checkPointUnit.getY()+0.25, checkPointUnit.getZ());
+                    Location location = new Location(Bukkit.getWorld("world"), checkPointUnit.getX(), checkPointUnit.getY()+1, checkPointUnit.getZ());
                     player.teleport(location);
                     player.sendMessage("§eVous avez rejoin le dernier §cCheckpoint !");
                 }
             }
             if(current.getType().equals(Material.COMPASS)){
                 MenuPrincipal.OpenInv(player);
+            }
+            if(current.getType().equals(Material.PLAYER_HEAD)){
+                MenuStats.OpenInv(player);
             }
             if(current.getType().equals(Material.COMPARATOR)){
                 BukkitSend.CmdToProxy(player, "opt");

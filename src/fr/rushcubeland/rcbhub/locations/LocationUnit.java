@@ -5,8 +5,8 @@ import org.bukkit.Location;
 
 public enum LocationUnit {
 
-    LOBBY(new Location(Bukkit.getWorld("world"), -389, 69, 304)),
-    PARCOURS(new Location(Bukkit.getWorld("world"), -602, 85, 550)),
+    LOBBY(new Location(Bukkit.getWorld("world"), 50, 189, -5)),
+    PARCOURS(new Location(Bukkit.getWorld("world"), -90, 254, -16.7)),
     VIP_AREA(new Location(Bukkit.getWorld("world"), 50, 50, 50));
 
     private final Location location;

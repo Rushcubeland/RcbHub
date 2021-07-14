@@ -1,8 +1,11 @@
 package fr.rushcubeland.rcbhub.listeners;
 
+import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
 import fr.rushcubeland.rcbhub.parcours.Parcours;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,6 +22,14 @@ public class PlayerMove implements Listener {
             Location blockLocation = player.getLocation().getBlock().getRelative(BlockFace.DOWN).getLocation();
             Parcours.checkpointPassed(player, blockLocation);
 
+        }
+        if(player.getLocation().getY() <= 192 || player.getLocation().getBlock().isLiquid()){
+            if(Parcours.getParcoursDataPlayers().containsKey(player)){
+                CheckPointUnit checkPointUnit = Parcours.getParcoursDataPlayers().get(player);
+                Location location = new Location(Bukkit.getWorld("world"), checkPointUnit.getX(), checkPointUnit.getY()+1, checkPointUnit.getZ());
+                player.teleport(location);
+                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1F, 1F);
+            }
         }
     }
 }
