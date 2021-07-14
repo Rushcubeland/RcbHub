@@ -1,13 +1,16 @@
-package fr.rushcubeland.rcbhub.events;
+package fr.rushcubeland.rcbhub.listeners;
 
+import fr.rushcubeland.commons.Account;
+import fr.rushcubeland.rcbapi.RcbAPI;
 import fr.rushcubeland.rcbapi.tools.ItemBuilder;
 import fr.rushcubeland.rcbhub.RcbHub;
 import fr.rushcubeland.rcbhub.gui.MenuPrincipal;
+import fr.rushcubeland.rcbhub.locations.LocationUnit;
 import fr.rushcubeland.rcbhub.messaging.BukkitSend;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
+import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
+import fr.rushcubeland.rcbhub.parcours.Parcours;
+import fr.rushcubeland.rcbhub.tasks.ParcoursTask;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,6 +34,26 @@ public class PlayerInteract implements Listener {
         }
         ItemStack current = e.getItem();
         if(e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR){
+            if(current.getType().equals(Material.RED_BED)){
+                if(Parcours.getParcoursDataPlayers().containsKey(player)){
+                    player.teleport(LocationUnit.LOBBY.getLocation());
+                    player.sendMessage("§cVous avez quitter le parcours !");
+                    ParcoursTask.stopParcoursTask(player);
+                    Parcours.getParcoursTimersPlayers().remove(player);
+                    Parcours.getParcoursDataPlayers().remove(player);
+                    Account account = RcbAPI.getInstance().getAccount(player);
+                    PlayerJoin.initFlyPlayer(player, account.getRank());
+                    PlayerJoin.giveJoinItems(player);
+                }
+            }
+            if(current.getType().equals(Material.SLIME_BALL)){
+                if(Parcours.getParcoursDataPlayers().containsKey(player)){
+                    CheckPointUnit checkPointUnit = Parcours.getParcoursDataPlayers().get(player);
+                    Location location = new Location(Bukkit.getWorld("Lobby"), checkPointUnit.getX(), checkPointUnit.getY()+0.25, checkPointUnit.getZ());
+                    player.teleport(location);
+                    player.sendMessage("§eVous avez rejoin le dernier §cCheckpoint !");
+                }
+            }
             if(current.getType().equals(Material.COMPASS)){
                 MenuPrincipal.OpenInv(player);
             }

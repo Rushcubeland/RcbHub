@@ -1,4 +1,4 @@
-package fr.rushcubeland.rcbhub.events;
+package fr.rushcubeland.rcbhub.listeners;
 
 import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.rcbapi.RcbAPI;
@@ -17,8 +17,7 @@ public class PlayerQuit implements Listener {
         if(RcbAPI.getInstance().boards.containsKey(player)){
             RcbAPI.getInstance().boards.get(player).destroy();
         }
-        final Account account = RcbAPI.getInstance().getAccount(player);
-
+        Account account = RcbAPI.getInstance().getAccount(player);
         RankUnit rank = account.getRank();
         if(rank.getPower() <= 45){
             e.setQuitMessage(rank.getPrefix() + player.getDisplayName() + " §ca quitté le Lobby !");

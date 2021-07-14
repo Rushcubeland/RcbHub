@@ -1,7 +1,7 @@
 package fr.rushcubeland.rcbhub;
 
 import fr.rushcubeland.rcbhub.commands.CoinsCommand;
-import fr.rushcubeland.rcbhub.events.*;
+import fr.rushcubeland.rcbhub.listeners.*;
 import fr.rushcubeland.rcbhub.tasks.ScoreboardReloadTask;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -22,12 +22,12 @@ public class RcbHub extends JavaPlugin {
 
         reloadScoreboardTask();
 
-        RcbHub.getInstance().getLogger().info("RcbHub enabled");
+        RcbHub.getInstance().getLogger().info("[RcbHub] Plugin enabled");
     }
 
     @Override
     public void onDisable() {
-        RcbHub.getInstance().getLogger().info("RcbHub disabled");
+        RcbHub.getInstance().getLogger().info("[RcbHub] Plugin disabled");
         instance = null;
     }
 
@@ -47,6 +47,8 @@ public class RcbHub extends JavaPlugin {
         pm.registerEvents(new ChunksLoad(), this);
         pm.registerEvents(new FoodChange(), this);
         pm.registerEvents(new OnDamage(), this);
+        pm.registerEvents(new InventoryClick(), this);
+        pm.registerEvents(new PlayerMove(), this);
 
     }
 

@@ -1,10 +1,11 @@
-package fr.rushcubeland.rcbhub.events;
+package fr.rushcubeland.rcbhub.listeners;
 
 import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.rcbapi.RcbAPI;
 import fr.rushcubeland.rcbapi.rank.RankUnit;
 import fr.rushcubeland.rcbapi.tools.ItemBuilder;
 import fr.rushcubeland.rcbapi.tools.scoreboard.ScoreboardSign;
+import fr.rushcubeland.rcbhub.locations.LocationUnit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -23,6 +24,7 @@ public class PlayerJoin implements Listener {
     public void onJoin(PlayerJoinEvent e){
         Player player = e.getPlayer();
         player.getInventory().clear();
+        player.teleport(LocationUnit.LOBBY.getLocation());
         player.setGameMode(GameMode.ADVENTURE);
         player.setHealth(20D);
         player.setFoodLevel(20);
@@ -40,11 +42,11 @@ public class PlayerJoin implements Listener {
 
         }
         initFlyPlayer(player, rank);
-        initRankPlayerPermissions(player, rank);
         RcbAPI.getInstance().getTablist().setTabListPlayer(player);
+
     }
 
-    private void initFlyPlayer(Player player, RankUnit rank){
+    public static void initFlyPlayer(Player player, RankUnit rank){
         if(rank.getPower() <= 40){
             player.setAllowFlight(true);
             player.setFlying(true);
@@ -68,7 +70,7 @@ public class PlayerJoin implements Listener {
 
     }
 
-    private void giveJoinItems(Player player){
+    public static void giveJoinItems(Player player){
         ItemStack menup = new ItemBuilder(Material.COMPASS).setName("§6Menu Principal").setLore("§f ", "").toItemStack();
         menup.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
         ItemMeta menupm = menup.getItemMeta();
@@ -88,15 +90,6 @@ public class PlayerJoin implements Listener {
         player.getInventory().setItem(4, magicClock);
         player.getInventory().setItem(8, settings);
         player.getInventory().setItem(1, profil);
-    }
-
-    private void initRankPlayerPermissions(Player player, RankUnit rank){
-        if(rank.getPermissions().isEmpty()){
-            return;
-        }
-        for(String perm : rank.getPermissions()){
-            player.addAttachment(RcbAPI.getInstance()).setPermission(perm, true);
-        }
     }
 
 }

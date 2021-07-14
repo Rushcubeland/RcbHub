@@ -34,6 +34,9 @@ public class MenuPrincipal {
         ItemStack db = new ItemBuilder(Material.BEACON).setName("§6DeterrentBorder §f[CASUAL]").toItemStack();
         inventory.setItem(21, db);
 
+        ItemStack dac = new ItemBuilder(Material.WATER_BUCKET).setName("§bDé à coudre").toItemStack();
+        inventory.setItem(31, dac);
+
         Account account = RcbAPI.getInstance().getAccount(player);
 
         final ItemStack headp;
@@ -50,7 +53,6 @@ public class MenuPrincipal {
         headpm.setOwningPlayer(player);
         headp.setItemMeta(headpm);
         inventory.setItem(27, headp);
-
 
         ItemStack jump = new ItemBuilder(Material.GOLDEN_BOOTS).setName("§bParcours").setLore("§b ","§7Saute de bloc en bloc pour terminer le parcours", "§4 ", "§e➤ Se teleporter").removeFlags().toItemStack();
         inventory.setItem(35, jump);

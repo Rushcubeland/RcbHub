@@ -1,6 +1,9 @@
-package fr.rushcubeland.rcbhub.events;
+package fr.rushcubeland.rcbhub.listeners;
 
+import fr.rushcubeland.rcbapi.network.Network;
+import fr.rushcubeland.rcbapi.network.ServerUnit;
 import fr.rushcubeland.rcbhub.gui.MenuPrincipal;
+import fr.rushcubeland.rcbhub.locations.LocationUnit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,23 +15,27 @@ public class InventoryClick implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent e){
-        if(e.getCurrentItem() == null){
-            e.setCancelled(true);
-            return;
-        }
+        e.setCancelled(true);
         if(e.getWhoClicked() instanceof Player){
             Player player = (Player) e.getWhoClicked();
             ItemStack current = e.getCurrentItem();
+            if(current == null){
+                return;
+            }
             if(e.getInventory() == MenuPrincipal.getSpecifiedInv(player)){
                 e.setCancelled(true);
                 if(current.getType().equals(Material.ACACIA_DOOR)){
                     player.closeInventory();
                 }
+                if(current.getType().equals(Material.WATER_BUCKET)){
+                    Network.sendPlayerToServer(player, ServerUnit.DeterrentBorder_1);
+                    player.closeInventory();
+                }
+                if(current.getType().equals(Material.GOLDEN_BOOTS)){
+                    player.closeInventory();
+                    player.teleport(LocationUnit.PARCOURS.getLocation());
+                }
             }
-        }
-        else
-        {
-            return;
         }
     }
 }

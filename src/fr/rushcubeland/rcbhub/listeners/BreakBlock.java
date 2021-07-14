@@ -1,4 +1,4 @@
-package fr.rushcubeland.rcbhub.events;
+package fr.rushcubeland.rcbhub.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

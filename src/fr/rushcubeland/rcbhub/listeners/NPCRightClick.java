@@ -1,4 +1,4 @@
-package fr.rushcubeland.rcbhub.events;
+package fr.rushcubeland.rcbhub.listeners;
 
 import fr.rushcubeland.rcbapi.events.RightClickNPCEvent;
 import org.bukkit.entity.Player;
