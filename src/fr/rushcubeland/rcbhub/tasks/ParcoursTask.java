@@ -1,6 +1,6 @@
 package fr.rushcubeland.rcbhub.tasks;
 
-import fr.rushcubeland.rcbapi.tools.TitleManager;
+import fr.rushcubeland.rcbapi.bukkit.tools.TitleManager;
 import fr.rushcubeland.rcbhub.RcbHub;
 import fr.rushcubeland.rcbhub.parcours.Parcours;
 import org.apache.commons.lang.time.DurationFormatUtils;

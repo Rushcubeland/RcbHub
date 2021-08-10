@@ -1,8 +1,8 @@
 package fr.rushcubeland.rcbhub.listeners;
 
 import fr.rushcubeland.commons.Account;
-import fr.rushcubeland.rcbapi.RcbAPI;
-import fr.rushcubeland.rcbapi.rank.RankUnit;
+import fr.rushcubeland.commons.rank.RankUnit;
+import fr.rushcubeland.rcbapi.bukkit.RcbAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

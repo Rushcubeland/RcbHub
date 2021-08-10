@@ -1,10 +1,10 @@
 package fr.rushcubeland.rcbhub.listeners;
 
 import fr.rushcubeland.commons.Account;
-import fr.rushcubeland.rcbapi.RcbAPI;
-import fr.rushcubeland.rcbapi.rank.RankUnit;
-import fr.rushcubeland.rcbapi.tools.ItemBuilder;
-import fr.rushcubeland.rcbapi.tools.scoreboard.ScoreboardSign;
+import fr.rushcubeland.commons.rank.RankUnit;
+import fr.rushcubeland.rcbapi.bukkit.RcbAPI;
+import fr.rushcubeland.rcbapi.bukkit.tools.ItemBuilder;
+import fr.rushcubeland.rcbapi.bukkit.tools.ScoreboardSign;
 import fr.rushcubeland.rcbhub.locations.LocationUnit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;

@@ -1,39 +1,26 @@
 package fr.rushcubeland.rcbhub.gui;
 
+import fr.rushcubeland.commons.AStats;
 import fr.rushcubeland.commons.Account;
-import fr.rushcubeland.rcbapi.RcbAPI;
-import fr.rushcubeland.rcbapi.tools.ItemBuilder;
+import fr.rushcubeland.rcbapi.bukkit.RcbAPI;
+import fr.rushcubeland.rcbapi.bukkit.tools.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.HashMap;
 
-public class MenuPrincipal {
+public class StatsGUI {
 
     private static final HashMap<Player, Inventory> GUI = new HashMap<>();
 
     public static void OpenInv(Player player){
 
-        Inventory inventory = Bukkit.createInventory(null, 54, "§6Menu Principal");
-        initGlass(inventory, Material.CYAN_STAINED_GLASS_PANE);
-
-        ItemStack dbr = new ItemBuilder(Material.BEACON).setName("§6DeterrentBorder §f[§cRANKED§f]").removeFlags().toItemStack();
-        dbr.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
-        ItemMeta dbrm = dbr.getItemMeta();
-        dbr.setItemMeta(dbrm);
-        inventory.setItem(23, dbr);
-
-        ItemStack db = new ItemBuilder(Material.BEACON).setName("§6DeterrentBorder §f[CASUAL]").toItemStack();
-        inventory.setItem(21, db);
-
-        ItemStack dac = new ItemBuilder(Material.WATER_BUCKET).setName("§bDé à coudre").toItemStack();
-        inventory.setItem(31, dac);
+        Inventory inventory = Bukkit.createInventory(null, 54, "§cStatistiques");
+        initGlass(inventory, Material.GREEN_STAINED_GLASS_PANE);
 
         Account account = RcbAPI.getInstance().getAccount(player);
 
@@ -50,17 +37,15 @@ public class MenuPrincipal {
         SkullMeta headpm = (SkullMeta) headp.getItemMeta();
         headpm.setOwningPlayer(player);
         headp.setItemMeta(headpm);
-        inventory.setItem(27, headp);
+        inventory.setItem(4, headp);
 
-        ItemStack jump = new ItemBuilder(Material.GOLDEN_BOOTS).setName("§bParcours").setLore("§b ","§7Saute de bloc en bloc pour terminer le parcours", "§4 ", "§e➤ Se teleporter").removeFlags().toItemStack();
-        inventory.setItem(35, jump);
+        AStats aStats = RcbAPI.getInstance().getAccountStats(player);
 
-        ItemStack info = new ItemBuilder(Material.COMPASS).setName("§6Hub").setLore(" ", "§7Le hub est le lieu principal du serveur,", "§7il vous permet de vous amuser avec vos amis,", "§7d'explorer ses divers endroits ou de vous poser", "§7à coté de l'eau", " ", "§f➤ Il y a §e" + Bukkit.getOnlinePlayers().size() + " §fjoueurs sur le hub").toItemStack();
-        inventory.setItem(4, info);
+        ItemStack parcourStats = new ItemBuilder(Material.OAK_SIGN).removeFlags().setName("§eParcours").setLore(" ", "§6Meilleur temps: §c" + aStats.getParcoursTimerFormat(), " ").toItemStack();
+        inventory.setItem(25, parcourStats);
 
         ItemStack close = new ItemBuilder(Material.ACACIA_DOOR).setName("§cFermer").toItemStack();
         inventory.setItem(49, close);
-
 
         GUI.put(player, inventory);
         player.openInventory(inventory);

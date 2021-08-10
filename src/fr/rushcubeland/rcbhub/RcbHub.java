@@ -10,7 +10,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class RcbHub extends JavaPlugin {
 
     private static RcbHub instance;
-    private final String channel = "rcbproxy:main";
 
     @Override
     public void onEnable() {
@@ -18,6 +17,7 @@ public class RcbHub extends JavaPlugin {
         registerListeners();
         registerCommands();
 
+        String channel = "rcbapi:main";
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, channel);
 
         reloadScoreboardTask();
@@ -64,4 +64,5 @@ public class RcbHub extends JavaPlugin {
     public static RcbHub getInstance() {
         return instance;
     }
+
 }

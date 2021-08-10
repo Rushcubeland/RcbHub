@@ -1,9 +1,9 @@
 package fr.rushcubeland.rcbhub.listeners;
 
-import fr.rushcubeland.rcbapi.network.Network;
-import fr.rushcubeland.rcbapi.network.ServerUnit;
-import fr.rushcubeland.rcbhub.gui.MenuPrincipal;
-import fr.rushcubeland.rcbhub.gui.MenuStats;
+import fr.rushcubeland.rcbapi.bukkit.network.Network;
+import fr.rushcubeland.rcbapi.bukkit.network.ServerUnit;
+import fr.rushcubeland.rcbhub.gui.MainGUI;
+import fr.rushcubeland.rcbhub.gui.StatsGUI;
 import fr.rushcubeland.rcbhub.locations.LocationUnit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -23,12 +23,12 @@ public class InventoryClick implements Listener {
             if(current == null){
                 return;
             }
-            if(e.getInventory() == MenuStats.getSpecifiedInv(player)){
+            if(e.getInventory() == StatsGUI.getSpecifiedInv(player)){
                 if(current.getType().equals(Material.ACACIA_DOOR)){
                     player.closeInventory();
                 }
             }
-            if(e.getInventory() == MenuPrincipal.getSpecifiedInv(player)){
+            if(e.getInventory() == MainGUI.getSpecifiedInv(player)){
                 if(current.getType().equals(Material.ACACIA_DOOR)){
                     player.closeInventory();
                 }

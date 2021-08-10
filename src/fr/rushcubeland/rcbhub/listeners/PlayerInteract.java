@@ -1,13 +1,13 @@
 package fr.rushcubeland.rcbhub.listeners;
 
 import fr.rushcubeland.commons.Account;
-import fr.rushcubeland.rcbapi.RcbAPI;
-import fr.rushcubeland.rcbapi.tools.ItemBuilder;
+import fr.rushcubeland.rcbapi.bukkit.BukkitSend;
+import fr.rushcubeland.rcbapi.bukkit.RcbAPI;
+import fr.rushcubeland.rcbapi.bukkit.tools.ItemBuilder;
 import fr.rushcubeland.rcbhub.RcbHub;
-import fr.rushcubeland.rcbhub.gui.MenuPrincipal;
-import fr.rushcubeland.rcbhub.gui.MenuStats;
+import fr.rushcubeland.rcbhub.gui.MainGUI;
+import fr.rushcubeland.rcbhub.gui.StatsGUI;
 import fr.rushcubeland.rcbhub.locations.LocationUnit;
-import fr.rushcubeland.rcbhub.messaging.BukkitSend;
 import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
 import fr.rushcubeland.rcbhub.parcours.Parcours;
 import fr.rushcubeland.rcbhub.tasks.ParcoursTask;
@@ -56,10 +56,10 @@ public class PlayerInteract implements Listener {
                 }
             }
             if(current.getType().equals(Material.COMPASS)){
-                MenuPrincipal.OpenInv(player);
+                MainGUI.OpenInv(player);
             }
             if(current.getType().equals(Material.PLAYER_HEAD)){
-                MenuStats.OpenInv(player);
+                StatsGUI.OpenInv(player);
             }
             if(current.getType().equals(Material.COMPARATOR)){
                 BukkitSend.CmdToProxy(player, "opt");

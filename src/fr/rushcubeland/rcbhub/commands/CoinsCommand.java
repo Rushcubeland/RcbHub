@@ -1,7 +1,7 @@
 package fr.rushcubeland.rcbhub.commands;
 
 import fr.rushcubeland.commons.Account;
-import fr.rushcubeland.rcbapi.RcbAPI;
+import fr.rushcubeland.rcbapi.bukkit.RcbAPI;
 import fr.rushcubeland.rcbhub.RcbHub;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
