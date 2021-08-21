@@ -1,7 +1,7 @@
 package fr.rushcubeland.rcbhub.listeners;
 
-import fr.rushcubeland.rcbapi.bukkit.network.Network;
-import fr.rushcubeland.rcbapi.bukkit.network.ServerUnit;
+import fr.rushcubeland.rcbapi.bukkit.BukkitSend;
+import fr.rushcubeland.rcbapi.bukkit.queue.QueueUnit;
 import fr.rushcubeland.rcbhub.gui.MainGUI;
 import fr.rushcubeland.rcbhub.gui.StatsGUI;
 import fr.rushcubeland.rcbhub.locations.LocationUnit;
@@ -33,7 +33,7 @@ public class InventoryClick implements Listener {
                     player.closeInventory();
                 }
                 if(current.getType().equals(Material.WATER_BUCKET)){
-                    Network.sendPlayerToServer(player, ServerUnit.DeterrentBorder_1);
+                    BukkitSend.requestJoinQueue(player, QueueUnit.DE_A_COUDRE);
                     player.closeInventory();
                 }
                 if(current.getType().equals(Material.GOLDEN_BOOTS)){

@@ -2,6 +2,7 @@ package fr.rushcubeland.rcbhub;
 
 import fr.rushcubeland.rcbhub.commands.CoinsCommand;
 import fr.rushcubeland.rcbhub.listeners.*;
+import fr.rushcubeland.rcbhub.npc.NPCUnit;
 import fr.rushcubeland.rcbhub.tasks.ScoreboardReloadTask;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -20,6 +21,8 @@ public class RcbHub extends JavaPlugin {
         String channel = "rcbapi:main";
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, channel);
 
+        NPCUnit.createAll();
+
         reloadScoreboardTask();
 
         RcbHub.getInstance().getLogger().info("Plugin enabled");
@@ -27,6 +30,7 @@ public class RcbHub extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        NPCUnit.deleteAll();
         RcbHub.getInstance().getLogger().info("Plugin disabled");
         instance = null;
     }

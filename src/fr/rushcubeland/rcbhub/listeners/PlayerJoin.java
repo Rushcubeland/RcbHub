@@ -4,6 +4,7 @@ import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.commons.rank.RankUnit;
 import fr.rushcubeland.rcbapi.bukkit.RcbAPI;
 import fr.rushcubeland.rcbapi.bukkit.tools.ItemBuilder;
+import fr.rushcubeland.rcbapi.bukkit.tools.NPC;
 import fr.rushcubeland.rcbapi.bukkit.tools.ScoreboardSign;
 import fr.rushcubeland.rcbhub.locations.LocationUnit;
 import org.bukkit.GameMode;
@@ -43,6 +44,7 @@ public class PlayerJoin implements Listener {
         }
         initFlyPlayer(player, rank);
         RcbAPI.getInstance().getTablist().setTabListPlayer(player);
+        NPC.spawnAll(player);
 
     }
 
