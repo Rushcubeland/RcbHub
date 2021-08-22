@@ -7,6 +7,7 @@ import fr.rushcubeland.rcbapi.bukkit.tools.ItemBuilder;
 import fr.rushcubeland.rcbapi.bukkit.tools.NPC;
 import fr.rushcubeland.rcbapi.bukkit.tools.ScoreboardSign;
 import fr.rushcubeland.rcbhub.locations.LocationUnit;
+import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -44,6 +45,7 @@ public class PlayerJoin implements Listener {
         }
         initFlyPlayer(player, rank);
         RcbAPI.getInstance().getTablist().setTabListPlayer(player);
+        CheckPointUnit.placeHolograms(player);
         NPC.spawnAll(player);
 
     }

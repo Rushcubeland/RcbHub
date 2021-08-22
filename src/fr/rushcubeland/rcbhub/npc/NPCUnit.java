@@ -1,15 +1,16 @@
 package fr.rushcubeland.rcbhub.npc;
 
 import fr.rushcubeland.rcbapi.bukkit.tools.NPC;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.World;
+import net.minecraft.server.v1_15_R1.EnumItemSlot;
+import org.bukkit.*;
+import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftItemStack;
+import org.bukkit.inventory.ItemStack;
 
 public enum NPCUnit {
 
-    DE_A_COUDRE("TEST", Bukkit.getWorld("world"), new Location(null, 65.5, 187, 11.5, 137, 0),
-            "ewogICJ0aW1lc3RhbXAiIDogMTYyOTUwODMzOTA0MSwKICAicHJvZmlsZUlkIiA6ICJkMDViNzVlMWE3MjA0NTRiYjYxMzE2NmJlZDAwYjk2ZiIsCiAgInByb2ZpbGVOYW1lIiA6ICJuZXNjaG9vbGxhciIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS9mMjRlNDA0NjgxYzI3NTEyMDcyZmJkNWIzZDIxYzY0YTc3NDM3YzE1ZTU1ZDhlZTU3NDY4N2YyMjkzYjM4MzI3IgogICAgfSwKICAgICJDQVBFIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS8yMzQwYzBlMDNkZDI0YTExYjE1YThiMzNjMmE3ZTllMzJhYmIyMDUxYjI0ODFkMGJhN2RlZmQ2MzVjYTdhOTMzIgogICAgfQogIH0KfQ",
-            "gqxZ8Z4/UxCTA2CuwYENOjh4eBmtJLEgNJfn0s5PkOlbVYPiatUYUZgvzGL1eb4/W+jnvEm5qmEBRJADsgid27P71+ZOfeZ7f7p9hZvzOB7stdmHCnec09TRTm/FTzr5sTIDn5ydEj8Rfxi5FXP1SykRFH458oeoN91iM3TYwm3Z0nqDN9uiz0dm6ji5qgdlJOKsp1QKL4/sRXkbhGOGnfumyjZQ0iN5aAbk0RAvHts5Rvh4Hxn0J1OVXyjbE4yq2z2vMQQO6x4f2GtvtQ1t8VzuJBlu6ThMwc0n4/4m5NwRNc7RRKJEEQQGlkQjSW3rRmHzE2kSJAwwBbgNW7BdZIj42wEphhRPBn96SYumQBvz7bCd/YLJHHYEEemsygdJYLXPonn7qysy3kTUyDCO+CfI1Cs2VP822v4THaNi8QIUj4n7AQJ/OF89WHJfV4D8rWIC1PF7f2Gxz/bJgQB3tndfnrtGtGQwAHAlKdJhVof1s96FsCfHyQxtP4QASi3lFNJ8r09yQ8FZJgH1IkJv1Eqt7hkU6vXLDe1CQErkFx+vxhbNVVvug75BQM5hRi9/O4brry34AaszazsnDQScr5CsP1PYgyqx0lE9vo85chlk8mYBhyzXf2Kicc1iixrxaBxwrvw7Sk0hlxjDKdRp0JoQsQgVrCn7Emr5qsS2uJg=");
+    DE_A_COUDRE(ChatColor.AQUA + "Dé à Coudre", Bukkit.getWorld("world"), new Location(null, 65.5, 187, 11.5, 137, 0),
+            "eyJ0aW1lc3RhbXAiOjE0NjUwOTE2MDc4NjMsInByb2ZpbGVJZCI6ImIwZDRiMjhiYzFkNzQ4ODlhZjBlODY2MWNlZTk2YWFiIiwicHJvZmlsZU5hbWUiOiJJbnZlbnRpdmVHYW1lcyIsInNpZ25hdHVyZVJlcXVpcmVkIjp0cnVlLCJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTAxM2U2ZDNhZWJjY2M1ZGEyZTQ1ZjQzYjU4ZjNkZjVjOTUzMzEwM2I5MDQ2MzkzMjU5MmQzNzdjOTM4NTgifX19",
+            "keEwIvunVzTyFjLnpmeQsBeu3Kuyw2rG4CUIQEtmG0VZFOVmEaij8/bqVeb/sK8/1cJ8qtT5HvBUnp5lvdVLa59p91XPUxJrFU+j16NgiZ2iEWEcBgF96e0x9fof2UczAmnc7ZNyd7SfDAC9nrGm4kVdEkvyVqN7xL3JG9Hs68/3xbduzxZyZnjm7GSlzs/dj9M2fXprhjLjGwAb+H+ZOXTBFN0GA3ahoXp3+fOo+E+fH9KgRSJJishS/pkLz4KZaavZs+4ARphLQzT3Ty8nGTsmXgP2bq27Ld64YLaZHqdt3cuTne8G9FyKgsFClQmJtxmP4SoGNQPMKV8tIlpdVJxHwqNPDQ/pHAt5W5YSR2E8EqGch7bpCxY8u/nsmJJaK5/MpxghmMZ3tsNv/VI2F4utZBH2xO7wpN8AP2fnpSUZHDm1PhjJSAlRMlcI8puObkjLxLdRD20Dsp1CHbUTAK7129Hb/8IhVCBanoGqd+CtU0SYsh/YK3qpKmlFvCHElvKyxw1C/yVBGZMoWcn/t3lzve8gN+JdYJwE5pF2zGMmu/UYEUoWdA9Xja6PP215AdDtFmcIffVpLnOqEJ9ke7vMUQOJtrrirTCbGqJ9u5G/MQxNIugBy1+eF+orWTcuGoO+EejBAY6G7PciuyM99roNXy5DyRVykEu41lID658=");
 
     private final String name;
     private final World world;
@@ -46,13 +47,22 @@ public enum NPCUnit {
         return signature;
     }
 
+
     public static void createAll(){
         for(NPCUnit npcUnit : NPCUnit.values()){
             Location newLocation = npcUnit.getLocation();
             newLocation.setWorld(npcUnit.getWorld());
             NPC npc = new NPC(npcUnit.getName(), npcUnit.getWorld(), newLocation);
             npc.setSkin(npcUnit.getTexture(), npcUnit.getSignature());
+            initEquipments(npcUnit, npc);
             npc.create();
+        }
+    }
+
+    private static void initEquipments(NPCUnit npcUnit, NPC npc){
+        if(npcUnit.equals(NPCUnit.DE_A_COUDRE)){
+            npc.setEquipment(EnumItemSlot.MAINHAND, CraftItemStack.asNMSCopy(new ItemStack(Material.WATER_BUCKET)));
+
         }
     }
 

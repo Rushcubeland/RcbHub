@@ -30,7 +30,6 @@ public class RcbHub extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        NPCUnit.deleteAll();
         RcbHub.getInstance().getLogger().info("Plugin disabled");
         instance = null;
     }

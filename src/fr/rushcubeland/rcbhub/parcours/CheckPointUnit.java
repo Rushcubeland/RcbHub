@@ -1,6 +1,8 @@
 package fr.rushcubeland.rcbhub.parcours;
 
+import fr.rushcubeland.rcbapi.bukkit.tools.Hologram;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 public enum CheckPointUnit {
 
@@ -42,5 +44,12 @@ public enum CheckPointUnit {
     public static boolean locationMatch(CheckPointUnit checkPointUnit, Location location){
         return checkPointUnit.getX() == location.getBlock().getX() && checkPointUnit.getY() == location.getBlock().getY()
                 && checkPointUnit.getZ() == location.getBlock().getZ();
+    }
+
+    public static void placeHolograms(Player player){
+        for(CheckPointUnit checkPoint : CheckPointUnit.values()){
+            Hologram hologram = new Hologram(checkPoint.getName());
+            hologram.sendLines(player);
+        }
     }
 }
