@@ -1,28 +1,31 @@
 package fr.rushcubeland.rcbhub.parcours;
 
 import fr.rushcubeland.rcbapi.bukkit.tools.Hologram;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public enum CheckPointUnit {
 
-
-    START("le §6Départ", -89, 253, -19),
-    FIRST_CHECKPOINT("le §61er Checkpoint", -51, 241, -54),
-    SND_CHECKPOINT("le §6Snd Checkpoint", -16, 231, -87),
-    THIRD_CHECKPOINT("le §63ème Checkpoint", 39, 194, -118),
-    END("§6l'Arrivée", 53, 214, -110);
+    START("le §6Départ", -89, 253, -19, new String[]{"§eParcours", "§6Départ"}),
+    FIRST_CHECKPOINT("le §61er Checkpoint", -51, 241, -54, new String[]{"§61er Checkpoint"}),
+    SND_CHECKPOINT("le §6Snd Checkpoint", -16, 231, -87, new String[]{"§6Snd Checkpoint"}),
+    THIRD_CHECKPOINT("le §63ème Checkpoint", 39, 194, -118, new String[]{"§63ème Checkpoint"}),
+    END("§6l'Arrivée", 53, 214, -110, new String[]{"§eParcours", "§6Arrivée"});
 
     private final String name;
     private final int x;
     private final int y;
     private final int z;
+    private final String[] holograms;
+    private Hologram hologram;
 
-    CheckPointUnit(String name, int x, int y, int z) {
+    CheckPointUnit(String name, int x, int y, int z, String[] holograms) {
         this.name = name;
         this.x = x;
         this.y = y;
         this.z = z;
+        this.holograms = holograms;
     }
 
     public String getName() {
@@ -41,15 +44,34 @@ public enum CheckPointUnit {
         return z;
     }
 
+    public String[] getHolograms() {
+        return holograms;
+    }
+
     public static boolean locationMatch(CheckPointUnit checkPointUnit, Location location){
         return checkPointUnit.getX() == location.getBlock().getX() && checkPointUnit.getY() == location.getBlock().getY()
                 && checkPointUnit.getZ() == location.getBlock().getZ();
     }
 
-    public static void placeHolograms(Player player){
+    public static void placeHolograms(){
         for(CheckPointUnit checkPoint : CheckPointUnit.values()){
-            Hologram hologram = new Hologram(checkPoint.getName());
-            hologram.sendLines(player);
+            Hologram hologram = new Hologram(checkPoint.getHolograms());
+            Location location = new Location(Bukkit.getWorld("world"), checkPoint.getX(), checkPoint.getY(), checkPoint.getZ());
+            hologram.generateLines(location.add(0.0D, 2D, 0.0D));
+            checkPoint.hologram = hologram;
         }
+    }
+
+    public static void showHolograms(Player player){
+        for(CheckPointUnit checkPoint : CheckPointUnit.values()){
+            checkPoint.hologram.addReceiver(player);
+        }
+    }
+
+    public static void HideHolograms(Player player){
+        for(CheckPointUnit checkPoint : CheckPointUnit.values()){
+            checkPoint.hologram.removeReceiver(player);
+        }
+
     }
 }

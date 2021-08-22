@@ -3,6 +3,7 @@ package fr.rushcubeland.rcbhub;
 import fr.rushcubeland.rcbhub.commands.CoinsCommand;
 import fr.rushcubeland.rcbhub.listeners.*;
 import fr.rushcubeland.rcbhub.npc.NPCUnit;
+import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
 import fr.rushcubeland.rcbhub.tasks.ScoreboardReloadTask;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -22,6 +23,7 @@ public class RcbHub extends JavaPlugin {
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, channel);
 
         NPCUnit.createAll();
+        CheckPointUnit.placeHolograms();
 
         reloadScoreboardTask();
 

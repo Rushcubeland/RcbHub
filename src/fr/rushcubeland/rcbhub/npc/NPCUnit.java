@@ -62,7 +62,6 @@ public enum NPCUnit {
     private static void initEquipments(NPCUnit npcUnit, NPC npc){
         if(npcUnit.equals(NPCUnit.DE_A_COUDRE)){
             npc.setEquipment(EnumItemSlot.MAINHAND, CraftItemStack.asNMSCopy(new ItemStack(Material.WATER_BUCKET)));
-
         }
     }
 

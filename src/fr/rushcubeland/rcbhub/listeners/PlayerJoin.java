@@ -30,10 +30,16 @@ public class PlayerJoin implements Listener {
         player.setGameMode(GameMode.ADVENTURE);
         player.setHealth(20D);
         player.setFoodLevel(20);
+
         player.sendTitle("§6Rushcubeland", "§cUnivers compétitif et stratégique !", 10, 70, 20);
+
+        CheckPointUnit.showHolograms(player);
+
         RcbAPI.getInstance().getTablist().sendTabList(player);
+
         initScoreboardPlayer(player);
         giveJoinItems(player);
+
         Account account = RcbAPI.getInstance().getAccount(player);
         RankUnit rank = account.getRank();
         if(rank.getPower() <= 45){
@@ -44,8 +50,9 @@ public class PlayerJoin implements Listener {
 
         }
         initFlyPlayer(player, rank);
+
         RcbAPI.getInstance().getTablist().setTabListPlayer(player);
-        CheckPointUnit.placeHolograms(player);
+
         NPC.spawnAll(player);
 
     }
