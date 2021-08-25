@@ -1,6 +1,5 @@
 package fr.rushcubeland.rcbhub;
 
-import fr.rushcubeland.rcbhub.commands.CoinsCommand;
 import fr.rushcubeland.rcbhub.listeners.*;
 import fr.rushcubeland.rcbhub.npc.NPCUnit;
 import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
@@ -58,7 +57,6 @@ public class RcbHub extends JavaPlugin {
     }
 
     private void registerCommands(){
-        getCommand("coins").setExecutor(new CoinsCommand(this));
     }
 
     private void reloadScoreboardTask(){
