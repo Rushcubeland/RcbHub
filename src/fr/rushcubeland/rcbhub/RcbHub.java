@@ -51,7 +51,6 @@ public class RcbHub extends JavaPlugin {
         pm.registerEvents(new ChunksLoad(), this);
         pm.registerEvents(new FoodChange(), this);
         pm.registerEvents(new OnDamage(), this);
-        pm.registerEvents(new InventoryClick(), this);
         pm.registerEvents(new PlayerMove(), this);
 
     }

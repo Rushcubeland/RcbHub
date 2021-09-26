@@ -15,20 +15,20 @@ import org.bukkit.inventory.ItemStack;
 public class InventoryClick implements Listener {
 
     @EventHandler
-    public void onClick(InventoryClickEvent e){
-        e.setCancelled(true);
-        if(e.getWhoClicked() instanceof Player){
-            Player player = (Player) e.getWhoClicked();
-            ItemStack current = e.getCurrentItem();
+    public void onClick(InventoryClickEvent event){
+        event.setCancelled(true);
+        if(event.getWhoClicked() instanceof Player){
+            Player player = (Player) event.getWhoClicked();
+            ItemStack current = event.getCurrentItem();
             if(current == null){
                 return;
             }
-            if(e.getInventory() == StatsGUI.getSpecifiedInv(player)){
+            if(event.getInventory() == StatsGUI.getSpecifiedInv(player)){
                 if(current.getType().equals(Material.ACACIA_DOOR)){
                     player.closeInventory();
                 }
             }
-            if(e.getInventory() == MainGUI.getSpecifiedInv(player)){
+            if(event.getInventory() == MainGUI.getSpecifiedInv(player)){
                 if(current.getType().equals(Material.ACACIA_DOOR)){
                     player.closeInventory();
                 }

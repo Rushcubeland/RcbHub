@@ -23,8 +23,8 @@ import org.bukkit.inventory.meta.SkullMeta;
 public class PlayerJoin implements Listener {
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e){
-        Player player = e.getPlayer();
+    public void onJoin(PlayerJoinEvent event){
+        Player player = event.getPlayer();
         player.getInventory().clear();
         player.teleport(LocationUnit.LOBBY.getLocation());
         player.setGameMode(GameMode.ADVENTURE);
@@ -43,10 +43,10 @@ public class PlayerJoin implements Listener {
         Account account = RcbAPI.getInstance().getAccount(player);
         RankUnit rank = account.getRank();
         if(rank.getPower() <= 45){
-            e.setJoinMessage(rank.getPrefix() + player.getDisplayName() + " §ba rejoin le Lobby !");
+            event.setJoinMessage(rank.getPrefix() + player.getDisplayName() + " §ba rejoin le Lobby !");
         }
         else {
-            e.setJoinMessage(null);
+            event.setJoinMessage(null);
 
         }
         initFlyPlayer(player, rank);

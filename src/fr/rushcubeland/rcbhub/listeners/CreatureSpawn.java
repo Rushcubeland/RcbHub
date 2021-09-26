@@ -8,12 +8,12 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 public class CreatureSpawn implements Listener {
 
     @EventHandler
-    public void onSpawn(CreatureSpawnEvent e){
-        if(e == null){
+    public void onSpawn(CreatureSpawnEvent event){
+        if(event == null){
             return;
         }
-        if(e.getSpawnReason() != CreatureSpawnEvent.SpawnReason.CUSTOM){
-            e.setCancelled(true);
+        if(event.getSpawnReason() != CreatureSpawnEvent.SpawnReason.CUSTOM){
+            event.setCancelled(true);
         }
     }
 }

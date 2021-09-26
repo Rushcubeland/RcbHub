@@ -7,8 +7,8 @@ import org.bukkit.event.block.BlockPlaceEvent;
 public class PlaceBlock implements Listener {
 
     @EventHandler
-    public void onPlace(BlockPlaceEvent e){
-        e.setCancelled(true);
+    public void onPlace(BlockPlaceEvent event){
+        event.setCancelled(true);
     }
 
 }

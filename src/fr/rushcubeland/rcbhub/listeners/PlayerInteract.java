@@ -28,13 +28,13 @@ public class PlayerInteract implements Listener {
     private final HashMap<Player, Boolean> dataTartareShadow = new HashMap<>();
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent e){
-        Player player = e.getPlayer();
-        if(e.getItem() == null){
+    public void onInteract(PlayerInteractEvent event){
+        Player player = event.getPlayer();
+        if(event.getItem() == null){
             return;
         }
-        ItemStack current = e.getItem();
-        if(e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR){
+        ItemStack current = event.getItem();
+        if(event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR){
             if(current.getType().equals(Material.RED_BED)){
                 if(Parcours.getParcoursDataPlayers().containsKey(player)){
                     player.teleport(LocationUnit.LOBBY.getLocation());

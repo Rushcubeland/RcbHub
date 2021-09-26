@@ -11,9 +11,9 @@ import org.bukkit.event.Listener;
 public class NPCRightClick implements Listener {
 
     @EventHandler
-    public void onClick(RightClickNPCEvent e){
-        Player player = e.getPlayer();
-        String name = e.getNpc().getName();
+    public void onClick(RightClickNPCEvent event){
+        Player player = event.getPlayer();
+        String name = event.getNpc().getName();
         if(name.equalsIgnoreCase(NPCUnit.DE_A_COUDRE.getName())){
             BukkitSend.requestJoinQueue(player, QueueUnit.DE_A_COUDRE);
         }

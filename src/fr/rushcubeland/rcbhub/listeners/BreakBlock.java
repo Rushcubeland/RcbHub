@@ -7,10 +7,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 public class BreakBlock implements Listener {
 
     @EventHandler
-    public void onBreak(BlockBreakEvent e){
-        if(e.getBlock() == null){
-            return;
-        }
-        e.setCancelled(true);
+    public void onBreak(BlockBreakEvent event){
+        event.setCancelled(true);
     }
 }

@@ -8,12 +8,12 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 public class PickupItem implements Listener {
 
     @EventHandler
-    public void onPickup(EntityPickupItemEvent e){
-        if(e == null || e.getItem() == null){
+    public void onPickup(EntityPickupItemEvent event){
+        if(event == null){
             return;
         }
-        if(e.getEntity() instanceof Player){
-            e.setCancelled(true);
+        if(event.getEntity() instanceof Player){
+            event.setCancelled(true);
         }
     }
 }

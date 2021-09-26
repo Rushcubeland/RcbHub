@@ -22,36 +22,33 @@ import java.util.ArrayList;
 public class PlayerChat implements Listener {
 
     @EventHandler(priority = EventPriority.LOW)
-    public void onChat(AsyncPlayerChatEvent e){
-        Player player = e.getPlayer();
-        if(MuteData.isInMuteData(e.getPlayer().getUniqueId().toString())){
-            if(!e.getMessage().startsWith("/")){
-                e.setCancelled(true);
+    public void onChat(AsyncPlayerChatEvent event){
+        Player player = event.getPlayer();
+        if(MuteData.isInMuteData(event.getPlayer().getUniqueId().toString())){
+            if(!event.getMessage().startsWith("/")){
+                event.setCancelled(true);
                 return;
             }
         }
         if(ReportMsgCommand.msgs.containsKey(player.getName())){
-            ReportMsgCommand.msgs.get(player.getName()).add(e.getMessage());
+            ReportMsgCommand.msgs.get(player.getName()).add(event.getMessage());
         }
         else
         {
             ArrayList<String> msgs = new ArrayList<>();
-            msgs.add(e.getMessage());
+            msgs.add(event.getMessage());
             ReportMsgCommand.msgs.put(player.getName(), msgs);
         }
         Account account = RcbAPI.getInstance().getAccount(player);
-        TextComponent icon = new TextComponent("§4⚠");
-        icon.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText("§4Signaler")));
-        icon.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/reportmsg " + player.getName() + " " + e.getMessage()));
-        TextComponent format = new TextComponent(account.getRank().getPrefix() + player.getDisplayName() + ": " + e.getMessage());
-        format.setClickEvent(null);
-        format.setHoverEvent(null);
+        TextComponent msg = new TextComponent(event.getMessage());
+        msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText("§4Signaler")));
+        msg.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/reportmsg " + player.getName() + " " + msg));
         for(Player pls : Bukkit.getOnlinePlayers()){
             AOptions aOptions = RcbAPI.getInstance().getAccountOptions(pls);
             if(aOptions.getStateChat().equals(OptionUnit.OPEN)){
-                pls.spigot().sendMessage(new ComponentBuilder(icon).append(format).create());
+                pls.spigot().sendMessage(new ComponentBuilder(account.getRank().getPrefix() + player.getDisplayName() + ": ").append(msg).create());
             }
         }
-        e.setCancelled(true);
+        event.setCancelled(true);
     }
 }

@@ -11,8 +11,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class PlayerQuit implements Listener {
 
     @EventHandler
-    public void onQuit(PlayerQuitEvent e){
-        Player player = e.getPlayer();
+    public void onQuit(PlayerQuitEvent event){
+        Player player = event.getPlayer();
 
         if(RcbAPI.getInstance().boards.containsKey(player)){
             RcbAPI.getInstance().boards.get(player).destroy();
@@ -20,11 +20,11 @@ public class PlayerQuit implements Listener {
         Account account = RcbAPI.getInstance().getAccount(player);
         RankUnit rank = account.getRank();
         if(rank.getPower() <= 45){
-            e.setQuitMessage(rank.getPrefix() + player.getDisplayName() + " §ca quitté le Lobby !");
+            event.setQuitMessage(rank.getPrefix() + player.getDisplayName() + " §ca quitté le Lobby !");
         }
         else
         {
-            e.setQuitMessage(null);
+            event.setQuitMessage(null);
         }
     }
 }
