@@ -40,13 +40,13 @@ public class PlayerChat implements Listener {
             ReportMsgCommand.msgs.put(player.getName(), msgs);
         }
         Account account = RcbAPI.getInstance().getAccount(player);
-        TextComponent msg = new TextComponent(event.getMessage());
-        msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText("§4Signaler")));
+        TextComponent msg = new TextComponent(account.getRank().getPrefix() + player.getDisplayName() + ": " + event.getMessage());
+        msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§4Signaler").create()));
         msg.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/reportmsg " + player.getName() + " " + msg));
         for(Player pls : Bukkit.getOnlinePlayers()){
             AOptions aOptions = RcbAPI.getInstance().getAccountOptions(pls);
             if(aOptions.getStateChat().equals(OptionUnit.OPEN)){
-                pls.spigot().sendMessage(new ComponentBuilder(account.getRank().getPrefix() + player.getDisplayName() + ": ").append(msg).create());
+                pls.spigot().sendMessage(new ComponentBuilder(msg).create());
             }
         }
         event.setCancelled(true);

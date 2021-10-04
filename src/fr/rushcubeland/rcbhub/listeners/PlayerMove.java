@@ -21,7 +21,6 @@ public class PlayerMove implements Listener {
         if(player.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
             Location blockLocation = player.getLocation().getBlock().getRelative(BlockFace.DOWN).getLocation();
             Parcours.checkpointPassed(player, blockLocation);
-
         }
         if(player.getLocation().getY() <= 192 || player.getLocation().getBlock().isLiquid()){
             if(Parcours.getParcoursDataPlayers().containsKey(player)){
