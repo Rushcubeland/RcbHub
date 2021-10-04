@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="RcbHub:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/RcbHub_jar</output-path>
-    <root id="archive" name="RcbHub.jar">
-      <element id="module-output" name="RcbHub" />
-    </root>
-  </artifact>
-</component>
