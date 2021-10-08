@@ -1,6 +1,6 @@
 package fr.rushcubeland.rcbhub.gui;
 
-import fr.rushcubeland.commons.AStats;
+import fr.rushcubeland.commons.AStatsDAC;
 import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.commons.rank.RankUnit;
 import fr.rushcubeland.rcbapi.bukkit.RcbAPI;
@@ -14,7 +14,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.HashMap;
 
-public class StatsGUI {
+public class StatsDACGUI {
 
     private static final HashMap<Player, Inventory> GUI = new HashMap<>();
 
@@ -24,6 +24,7 @@ public class StatsGUI {
         initGlass(inventory, Material.GREEN_STAINED_GLASS_PANE);
 
         Account account = RcbAPI.getInstance().getAccount(player);
+        AStatsDAC aStatsDAC = RcbAPI.getInstance().getAccountStatsDAC(player);
 
         final ItemStack headp;
 
@@ -40,15 +41,32 @@ public class StatsGUI {
         headp.setItemMeta(headpm);
         inventory.setItem(4, headp);
 
-        ItemStack dac = new ItemBuilder(Material.WATER_BUCKET).setName("§eDé à Courdre").setLore("").removeFlags().toItemStack();
-        inventory.setItem(19, dac);
+        int wins = aStatsDAC.getWins();
+        int loses = aStatsDAC.getLoses();
+        int success = aStatsDAC.getNbSuccessJumps();
+        int fails = aStatsDAC.getNbFailJumps();
+        double ratio_wl = (double) wins/loses;
+        double ratio_sf = (double) success/fails;
 
-        AStats aStats = RcbAPI.getInstance().getAccountStats(player);
+        ItemStack wins_item = new ItemBuilder(Material.OAK_SIGN).removeFlags().setName("§6Victoires: §c" + aStatsDAC.getWins()).toItemStack();
+        inventory.setItem(19, wins_item);
 
-        ItemStack parcourStats = new ItemBuilder(Material.OAK_SIGN).removeFlags().setName("§eParcours").setLore(" ", "§6Meilleur temps: §c" + aStats.getParcoursTimerFormat(), " ").toItemStack();
-        inventory.setItem(25, parcourStats);
+        ItemStack loses_item = new ItemBuilder(Material.OAK_SIGN).removeFlags().setName("§6Défaites: §c" + aStatsDAC.getLoses()).toItemStack();
+        inventory.setItem(21, loses_item);
 
-        ItemStack close = new ItemBuilder(Material.ACACIA_DOOR).setName("§cFermer").toItemStack();
+        ItemStack nbParties = new ItemBuilder(Material.OAK_SIGN).removeFlags().setName("§6Parties jouées: §c" + aStatsDAC.getNbParties()).toItemStack();
+        inventory.setItem(23, nbParties);
+
+        ItemStack wlkd = new ItemBuilder(Material.OAK_SIGN).removeFlags().setName("§6Ratio Victoires/Défaites: §c" + ratio_wl).toItemStack();
+        inventory.setItem(25, wlkd);
+
+        ItemStack sortsUsed = new ItemBuilder(Material.OAK_SIGN).removeFlags().setName("§6Sorts utilisés: §c" + aStatsDAC.getNbSortsUsed()).toItemStack();
+        inventory.setItem(30, sortsUsed);
+
+        ItemStack jumps_ratio = new ItemBuilder(Material.OAK_SIGN).removeFlags().setName("§6Ratio sauts Réussis/Ratés: §c" + ratio_sf).toItemStack();
+        inventory.setItem(32, jumps_ratio);
+
+        ItemStack close = new ItemBuilder(Material.ACACIA_DOOR).setName("§cRetour").toItemStack();
         inventory.setItem(49, close);
 
         GUI.put(player, inventory);
