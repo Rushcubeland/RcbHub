@@ -13,6 +13,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 
 public class StatsGUI {
@@ -51,6 +52,7 @@ public class StatsGUI {
         int sorts = aStatsDAC.getNbSortsUsed();
         double freq_w = (double) wins/parties;
         double freq_s = (double) success/jumps;
+        DecimalFormat df = new DecimalFormat("##.##%");
 
         ItemStack dac = new ItemBuilder(Material.WATER_BUCKET).setName("§bDé à Coudre").
                 setLore("", "§6Parties: §c" + parties,
@@ -61,7 +63,7 @@ public class StatsGUI {
                         "§6Sauts ratés: §c" + fails, "",
                         "§6Sorts utilisés: §c" + sorts, "",
                         "§6Pourcentage victoires: §c" + freq_w*100 + "%",
-                        "§6Pourcentage sauts réussis: §c" + freq_s*100 + "%")
+                        "§6Pourcentage sauts réussis: §c" + df.format(freq_s*100) + "%")
                 .removeFlags().toItemStack();
         inventory.setItem(20, dac);
 
