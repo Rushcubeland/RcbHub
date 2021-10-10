@@ -1,6 +1,7 @@
 package fr.rushcubeland.rcbhub.gui;
 
 import fr.rushcubeland.commons.AStats;
+import fr.rushcubeland.commons.AStatsDAC;
 import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.commons.rank.RankUnit;
 import fr.rushcubeland.rcbapi.bukkit.RcbAPI;
@@ -24,6 +25,7 @@ public class StatsGUI {
         initGlass(inventory, Material.GREEN_STAINED_GLASS_PANE);
 
         Account account = RcbAPI.getInstance().getAccount(player);
+        AStatsDAC aStatsDAC = RcbAPI.getInstance().getAccountStatsDAC(player);
 
         final ItemStack headp;
 
@@ -40,8 +42,28 @@ public class StatsGUI {
         headp.setItemMeta(headpm);
         inventory.setItem(4, headp);
 
-        ItemStack dac = new ItemBuilder(Material.WATER_BUCKET).setName("§eDé à Courdre").setLore("").removeFlags().toItemStack();
-        inventory.setItem(19, dac);
+        int parties = aStatsDAC.getNbParties();
+        int wins = aStatsDAC.getWins();
+        int loses = aStatsDAC.getLoses();
+        int jumps = aStatsDAC.getNbJumps();
+        int success = aStatsDAC.getNbSuccessJumps();
+        int fails = aStatsDAC.getNbFailJumps();
+        int sorts = aStatsDAC.getNbSortsUsed();
+        double freq_w = (double) wins/parties;
+        double freq_s = (double) success/jumps;
+
+        ItemStack dac = new ItemBuilder(Material.WATER_BUCKET).setName("§bDé à Coudre").
+                setLore("", "§6Parties: §c" + parties,
+                        "§6Victoires: §c" + wins,
+                        "§6Défaites: §c" + loses,
+                        "§6Sauts: §c" + jumps,
+                        "§6Sauts réussis: §c" + success,
+                        "§6Sauts ratés: §c" + fails,
+                        "§6Sorts utilisés: §c" + sorts,
+                        "§6Pourcentage victoires: §c" + freq_w*100 + "%",
+                        "§6Pourcentage sauts réussis: §c" + freq_s*100 + "%")
+                .removeFlags().toItemStack();
+        inventory.setItem(20, dac);
 
         AStats aStats = RcbAPI.getInstance().getAccountStats(player);
 

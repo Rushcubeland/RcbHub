@@ -3,7 +3,6 @@ package fr.rushcubeland.rcbhub.listeners;
 import fr.rushcubeland.rcbapi.bukkit.BukkitSend;
 import fr.rushcubeland.rcbapi.bukkit.queue.QueueUnit;
 import fr.rushcubeland.rcbhub.gui.MainGUI;
-import fr.rushcubeland.rcbhub.gui.StatsDACGUI;
 import fr.rushcubeland.rcbhub.gui.StatsGUI;
 import fr.rushcubeland.rcbhub.locations.LocationUnit;
 import org.bukkit.Material;
@@ -28,9 +27,6 @@ public class InventoryClick implements Listener {
                 if(current.getType().equals(Material.ACACIA_DOOR)){
                     player.closeInventory();
                 }
-                if(current.getType().equals(Material.WATER_BUCKET)){
-                    StatsDACGUI.OpenInv(player);
-                }
             }
             if(event.getInventory().equals(MainGUI.getSpecifiedInv(player))){
                 if(current.getType().equals(Material.ACACIA_DOOR)){
@@ -43,11 +39,6 @@ public class InventoryClick implements Listener {
                 if(current.getType().equals(Material.GOLDEN_BOOTS)){
                     player.closeInventory();
                     player.teleport(LocationUnit.PARCOURS.getLocation());
-                }
-            }
-            if(event.getInventory().equals(StatsDACGUI.getSpecifiedInv(player))){
-                if(current.getType().equals(Material.ACACIA_DOOR)){
-                    StatsGUI.OpenInv(player);
                 }
             }
         }
