@@ -55,11 +55,11 @@ public class StatsGUI {
         ItemStack dac = new ItemBuilder(Material.WATER_BUCKET).setName("§bDé à Coudre").
                 setLore("", "§6Parties: §c" + parties,
                         "§6Victoires: §c" + wins,
-                        "§6Défaites: §c" + loses,
+                        "§6Défaites: §c" + loses, "",
                         "§6Sauts: §c" + jumps,
                         "§6Sauts réussis: §c" + success,
-                        "§6Sauts ratés: §c" + fails,
-                        "§6Sorts utilisés: §c" + sorts,
+                        "§6Sauts ratés: §c" + fails, "",
+                        "§6Sorts utilisés: §c" + sorts, "",
                         "§6Pourcentage victoires: §c" + freq_w*100 + "%",
                         "§6Pourcentage sauts réussis: §c" + freq_s*100 + "%")
                 .removeFlags().toItemStack();
