@@ -62,8 +62,8 @@ public class StatsGUI {
                         "§6Sauts réussis: §c" + success,
                         "§6Sauts ratés: §c" + fails, "",
                         "§6Sorts utilisés: §c" + sorts, "",
-                        "§6Pourcentage victoires: §c" + freq_w*100 + "%",
-                        "§6Pourcentage sauts réussis: §c" + df.format(freq_s*100) + "%")
+                        "§6Pourcentage victoires: §c" + df.format(freq_w),
+                        "§6Pourcentage sauts réussis: §c" + df.format(freq_s))
                 .removeFlags().toItemStack();
         inventory.setItem(20, dac);
 
