@@ -14,7 +14,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.TimeZone;
 
 public class StatsGUI {
 
@@ -69,7 +71,11 @@ public class StatsGUI {
 
         AStats aStats = RcbAPI.getInstance().getAccountStats(player);
 
-        ItemStack parcourStats = new ItemBuilder(Material.OAK_SIGN).removeFlags().setName("§eParcours").setLore(" ", "§6Meilleur temps: §c" + aStats.getParcoursTimerFormat(), " ").toItemStack();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Paris"));
+
+        ItemStack parcourStats = new ItemBuilder(Material.OAK_SIGN).removeFlags().setName("§eParcours").setLore(
+                " ", "§6Meilleur temps: §c" + aStats.getParcoursTimerFormat(), "§6Première connexion: §7" + dateFormat.format(aStats.getFirstConnection()), " ").toItemStack();
         inventory.setItem(25, parcourStats);
 
         ItemStack close = new ItemBuilder(Material.ACACIA_DOOR).setName("§cFermer").toItemStack();

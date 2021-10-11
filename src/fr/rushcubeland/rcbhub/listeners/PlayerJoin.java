@@ -97,10 +97,13 @@ public class PlayerJoin implements Listener {
         profilm.setOwningPlayer(player);
         profil.setItemMeta(profilm);
 
+        ItemStack amis = new ItemBuilder(Material.PUFFERFISH).setName("§eAmis").setLore("§f ", "").removeFlags().toItemStack();
+
         player.getInventory().setItem(0, menup);
         player.getInventory().setItem(4, magicClock);
         player.getInventory().setItem(8, settings);
         player.getInventory().setItem(1, profil);
+        player.getInventory().setItem(6, amis);
     }
 
 }
