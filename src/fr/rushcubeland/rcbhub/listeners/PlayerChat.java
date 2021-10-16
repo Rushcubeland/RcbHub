@@ -6,6 +6,7 @@ import fr.rushcubeland.commons.options.OptionUnit;
 import fr.rushcubeland.rcbapi.bukkit.RcbAPI;
 import fr.rushcubeland.rcbapi.bukkit.commands.ReportMsgCommand;
 import fr.rushcubeland.rcbapi.bukkit.sanction.MuteData;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -24,14 +25,9 @@ public class PlayerChat implements Listener {
     @EventHandler(priority = EventPriority.LOW)
     public void onChat(AsyncPlayerChatEvent event){
         Player player = event.getPlayer();
-        if(MuteData.isInMuteData(event.getPlayer().getUniqueId().toString())){
-            if(!event.getMessage().startsWith("/")){
-                event.setCancelled(true);
-                return;
-            }
-        }
+        String message = event.getMessage();
         if(ReportMsgCommand.msgs.containsKey(player.getName())){
-            ReportMsgCommand.msgs.get(player.getName()).add(event.getMessage());
+            ReportMsgCommand.msgs.get(player.getName()).add(message);
         }
         else
         {
@@ -40,13 +36,16 @@ public class PlayerChat implements Listener {
             ReportMsgCommand.msgs.put(player.getName(), msgs);
         }
         Account account = RcbAPI.getInstance().getAccount(player);
-        TextComponent msg = new TextComponent(account.getRank().getPrefix() + player.getDisplayName() + ": " + event.getMessage());
-        msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§4Signaler").create()));
-        msg.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/reportmsg " + player.getName() + " " + msg));
+        TextComponent sign = new TextComponent("⚠");
+        TextComponent format = new TextComponent(account.getRank().getPrefix() + player.getDisplayName() + ": " + message);
+        sign.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Signaler le message").color(ChatColor.DARK_RED).create()));
+        sign.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/reportmsg " + player.getName() + " " + message));
+        format.setClickEvent(null);
+        format.setHoverEvent(null);
         for(Player pls : Bukkit.getOnlinePlayers()){
             AOptions aOptions = RcbAPI.getInstance().getAccountOptions(pls);
             if(aOptions.getStateChat().equals(OptionUnit.OPEN)){
-                pls.spigot().sendMessage(new ComponentBuilder(msg).create());
+                pls.spigot().sendMessage(new ComponentBuilder(sign).color(ChatColor.DARK_RED).append(format).reset().create());
             }
         }
         event.setCancelled(true);
