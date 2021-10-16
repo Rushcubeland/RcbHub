@@ -26,6 +26,13 @@ public class PlayerChat implements Listener {
     public void onChat(AsyncPlayerChatEvent event){
         Player player = event.getPlayer();
         String message = event.getMessage();
+        if(MuteData.isInMuteData(player.getUniqueId().toString())){
+            if(!message.startsWith("/")){
+                event.setCancelled(true);
+                player.sendMessage("§cVous avez été mute !");
+                return;
+            }
+        }
         if(ReportMsgCommand.msgs.containsKey(player.getName())){
             ReportMsgCommand.msgs.get(player.getName()).add(message);
         }
