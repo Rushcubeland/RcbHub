@@ -27,7 +27,7 @@ public class ScoreboardReloadTask extends BukkitRunnable {
             Bukkit.getScheduler().runTaskAsynchronously(RcbHub.getInstance(), () -> {
 
                 final RedissonClient redissonClient = RedisAccess.INSTANCE.getRedissonClient();
-                final String key = "account:" + player.getUniqueId().toString();
+                final String key = "account:" + player.getUniqueId();
                 final RBucket<Account> accountRBucket = redissonClient.getBucket(key);
 
                 final Account account = accountRBucket.get();
