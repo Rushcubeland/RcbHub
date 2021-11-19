@@ -1,5 +1,6 @@
 package fr.rushcubeland.rcbhub.ostracon;
 
+import fr.rushcubeland.rcbapi.bukkit.map.MapUnit;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -7,9 +8,9 @@ import org.bukkit.inventory.ItemStack;
 
 public enum OstraconUnit {
 
-    FIRST_OSTRACON("", Material.DARK_OAK_DOOR, new ItemStack(Material.WRITTEN_BOOK), new Location(Bukkit.getWorld("world"), 0, 0, 0), null, TreasureUnit.TREASURE),
-    SND_OSTRACON("", Material.DARK_OAK_DOOR, new ItemStack(Material.WRITTEN_BOOK), new Location(Bukkit.getWorld("world"), 0, 0, 0), FIRST_OSTRACON, TreasureUnit.TREASURE),
-    THIRD_OSTRACON("", Material.DARK_OAK_DOOR, new ItemStack(Material.WRITTEN_BOOK), new Location(Bukkit.getWorld("world"), 0, 0, 0), SND_OSTRACON, TreasureUnit.TREASURE);
+    FIRST_OSTRACON("", Material.DARK_OAK_DOOR, new ItemStack(Material.WRITTEN_BOOK), new Location(Bukkit.getWorld(MapUnit.LOBBY.getPath()), 0, 0, 0), null, TreasureUnit.TREASURE),
+    SND_OSTRACON("", Material.DARK_OAK_DOOR, new ItemStack(Material.WRITTEN_BOOK), new Location(Bukkit.getWorld(MapUnit.LOBBY.getPath()), 0, 0, 0), FIRST_OSTRACON, TreasureUnit.TREASURE),
+    THIRD_OSTRACON("", Material.DARK_OAK_DOOR, new ItemStack(Material.WRITTEN_BOOK), new Location(Bukkit.getWorld(MapUnit.LOBBY.getPath()), 0, 0, 0), SND_OSTRACON, TreasureUnit.TREASURE);
 
     private final String name;
     private final Material material;

@@ -60,7 +60,7 @@ public class RcbHub extends JavaPlugin {
 
     private void reloadScoreboardTask(){
         ScoreboardReloadTask reloadTask = new ScoreboardReloadTask();
-        reloadTask.runTaskTimer(this, 0L, 40L);
+        reloadTask.runTaskTimer(this, 0L, 80L);
     }
 
     public static RcbHub getInstance() {

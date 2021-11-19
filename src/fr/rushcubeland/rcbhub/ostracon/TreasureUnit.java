@@ -19,4 +19,16 @@ public enum TreasureUnit {
         this.reward = reward;
         this.location = location;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
 }

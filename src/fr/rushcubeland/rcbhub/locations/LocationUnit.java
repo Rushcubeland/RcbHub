@@ -6,9 +6,9 @@ import org.bukkit.Location;
 
 public enum LocationUnit {
 
-    LOBBY(new Location(Bukkit.getWorld(MapUnit.LOBBY.getName()), 50, 189, -5)),
-    PARCOURS(new Location(Bukkit.getWorld(MapUnit.LOBBY.getName()), -90, 254, -16.7)),
-    VIP_AREA(new Location(Bukkit.getWorld(MapUnit.LOBBY.getName()), 50, 50, 50));
+    LOBBY(new Location(Bukkit.getWorld(MapUnit.LOBBY.getPath()), 50, 189, -5)),
+    PARCOURS(new Location(Bukkit.getWorld(MapUnit.LOBBY.getPath()), -90, 254, -16.7)),
+    VIP_AREA(new Location(Bukkit.getWorld(MapUnit.LOBBY.getPath()), 50, 50, 50));
 
     private final Location location;
 

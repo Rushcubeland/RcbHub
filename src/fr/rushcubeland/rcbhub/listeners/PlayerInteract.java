@@ -3,6 +3,7 @@ package fr.rushcubeland.rcbhub.listeners;
 import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.rcbapi.bukkit.BukkitSend;
 import fr.rushcubeland.rcbapi.bukkit.RcbAPI;
+import fr.rushcubeland.rcbapi.bukkit.map.MapUnit;
 import fr.rushcubeland.rcbapi.bukkit.tools.ItemBuilder;
 import fr.rushcubeland.rcbhub.RcbHub;
 import fr.rushcubeland.rcbhub.gui.MainGUI;
@@ -52,7 +53,7 @@ public class PlayerInteract implements Listener {
                 if(current.getType().equals(Material.SLIME_BALL)){
                     if(Parcours.getParcoursDataPlayers().containsKey(player)){
                         CheckPointUnit checkPointUnit = Parcours.getParcoursDataPlayers().get(player);
-                        Location location = new Location(Bukkit.getWorld("world"), checkPointUnit.getX(), checkPointUnit.getY()+1, checkPointUnit.getZ());
+                        Location location = new Location(Bukkit.getWorld(MapUnit.LOBBY.getPath()), checkPointUnit.getX(), checkPointUnit.getY()+1, checkPointUnit.getZ());
                         player.teleport(location);
                         player.sendMessage("§eVous avez rejoin le dernier §cCheckpoint !");
                     }
