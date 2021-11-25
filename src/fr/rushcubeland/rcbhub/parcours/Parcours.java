@@ -84,11 +84,14 @@ public class Parcours {
                     PlayerJoin.giveJoinItems(player);
                     AStats aStats = RcbAPI.getInstance().getAccountStats(player);
                     long currentTimer = aStats.getParcoursTimer();
-                    if(timer < currentTimer){
+                    if(currentTimer == null){
+                        aStats.setParcoursTimer(timer);
+                    }
+                    else if(timer < currentTimer){
                         player.sendMessage("§6Félicitations, Vous avez battu votre §crecord personnel !");
                         aStats.setParcoursTimer(timer);
-                        RcbAPI.getInstance().sendAStatsToRedis(aStats);
                     }
+                    RcbAPI.getInstance().sendAStatsToRedis(aStats);
                 }
             }
 
