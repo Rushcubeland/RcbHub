@@ -1,6 +1,6 @@
 package fr.rushcubeland.rcbhub.listeners;
 
-import fr.rushcubeland.rcbapi.bukkit.map.MapUnit;
+import fr.rushcubeland.rcbcore.bukkit.map.MapUnit;
 import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
 import fr.rushcubeland.rcbhub.parcours.Parcours;
 import org.bukkit.Bukkit;

@@ -1,8 +1,8 @@
 package fr.rushcubeland.rcbhub.gui;
 
 import fr.rushcubeland.commons.Account;
-import fr.rushcubeland.rcbapi.bukkit.RcbAPI;
-import fr.rushcubeland.rcbapi.bukkit.tools.ItemBuilder;
+import fr.rushcubeland.rcbcore.bukkit.RcbAPI;
+import fr.rushcubeland.rcbcore.bukkit.tools.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

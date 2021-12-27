@@ -2,10 +2,10 @@ package fr.rushcubeland.rcbhub.listeners;
 
 import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.commons.rank.RankUnit;
-import fr.rushcubeland.rcbapi.bukkit.RcbAPI;
-import fr.rushcubeland.rcbapi.bukkit.tools.ItemBuilder;
-import fr.rushcubeland.rcbapi.bukkit.tools.NPC;
-import fr.rushcubeland.rcbapi.bukkit.tools.ScoreboardSign;
+import fr.rushcubeland.rcbcore.bukkit.RcbAPI;
+import fr.rushcubeland.rcbcore.bukkit.tools.ItemBuilder;
+import fr.rushcubeland.rcbcore.bukkit.tools.NPC;
+import fr.rushcubeland.rcbcore.bukkit.tools.ScoreboardSign;
 import fr.rushcubeland.rcbhub.locations.LocationUnit;
 import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
 import org.bukkit.GameMode;

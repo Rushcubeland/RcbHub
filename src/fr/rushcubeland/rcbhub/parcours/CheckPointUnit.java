@@ -1,7 +1,7 @@
 package fr.rushcubeland.rcbhub.parcours;
 
-import fr.rushcubeland.rcbapi.bukkit.map.MapUnit;
-import fr.rushcubeland.rcbapi.bukkit.tools.Hologram;
+import fr.rushcubeland.rcbcore.bukkit.map.MapUnit;
+import fr.rushcubeland.rcbcore.bukkit.tools.Hologram;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

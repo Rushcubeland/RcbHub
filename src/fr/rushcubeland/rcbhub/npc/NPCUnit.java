@@ -1,7 +1,7 @@
 package fr.rushcubeland.rcbhub.npc;
 
-import fr.rushcubeland.rcbapi.bukkit.map.MapUnit;
-import fr.rushcubeland.rcbapi.bukkit.tools.NPC;
+import fr.rushcubeland.rcbcore.bukkit.map.MapUnit;
+import fr.rushcubeland.rcbcore.bukkit.tools.NPC;
 import net.minecraft.server.v1_15_R1.EnumItemSlot;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftItemStack;

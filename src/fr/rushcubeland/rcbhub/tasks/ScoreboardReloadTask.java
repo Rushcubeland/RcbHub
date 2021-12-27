@@ -2,9 +2,9 @@ package fr.rushcubeland.rcbhub.tasks;
 
 import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.commons.data.redis.RedisAccess;
-import fr.rushcubeland.rcbapi.bukkit.RcbAPI;
-import fr.rushcubeland.rcbapi.bukkit.network.Network;
-import fr.rushcubeland.rcbapi.bukkit.tools.ScoreboardSign;
+import fr.rushcubeland.rcbcore.bukkit.RcbAPI;
+import fr.rushcubeland.rcbcore.bukkit.network.Network;
+import fr.rushcubeland.rcbcore.bukkit.tools.ScoreboardSign;
 import fr.rushcubeland.rcbhub.RcbHub;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

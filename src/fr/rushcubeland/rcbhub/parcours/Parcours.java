@@ -2,8 +2,8 @@ package fr.rushcubeland.rcbhub.parcours;
 
 import fr.rushcubeland.commons.AStats;
 import fr.rushcubeland.commons.Account;
-import fr.rushcubeland.rcbapi.bukkit.RcbAPI;
-import fr.rushcubeland.rcbapi.bukkit.tools.ItemBuilder;
+import fr.rushcubeland.rcbcore.bukkit.RcbAPI;
+import fr.rushcubeland.rcbcore.bukkit.tools.ItemBuilder;
 import fr.rushcubeland.rcbhub.listeners.PlayerJoin;
 import fr.rushcubeland.rcbhub.locations.LocationUnit;
 import fr.rushcubeland.rcbhub.tasks.ParcoursTask;

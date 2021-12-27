@@ -1,7 +1,7 @@
 package fr.rushcubeland.rcbhub.listeners;
 
-import fr.rushcubeland.rcbapi.bukkit.BukkitSend;
-import fr.rushcubeland.rcbapi.bukkit.queue.QueueUnit;
+import fr.rushcubeland.rcbcore.bukkit.BukkitSend;
+import fr.rushcubeland.rcbcore.bukkit.queue.QueueUnit;
 import fr.rushcubeland.rcbhub.gui.MainGUI;
 import fr.rushcubeland.rcbhub.gui.StatsGUI;
 import fr.rushcubeland.rcbhub.locations.LocationUnit;

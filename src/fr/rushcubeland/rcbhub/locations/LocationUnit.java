@@ -1,6 +1,6 @@
 package fr.rushcubeland.rcbhub.locations;
 
-import fr.rushcubeland.rcbapi.bukkit.map.MapUnit;
+import fr.rushcubeland.rcbcore.bukkit.map.MapUnit;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 

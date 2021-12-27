@@ -1,10 +1,10 @@
 package fr.rushcubeland.rcbhub.listeners;
 
 import fr.rushcubeland.commons.Account;
-import fr.rushcubeland.rcbapi.bukkit.BukkitSend;
-import fr.rushcubeland.rcbapi.bukkit.RcbAPI;
-import fr.rushcubeland.rcbapi.bukkit.map.MapUnit;
-import fr.rushcubeland.rcbapi.bukkit.tools.ItemBuilder;
+import fr.rushcubeland.rcbcore.bukkit.BukkitSend;
+import fr.rushcubeland.rcbcore.bukkit.RcbAPI;
+import fr.rushcubeland.rcbcore.bukkit.map.MapUnit;
+import fr.rushcubeland.rcbcore.bukkit.tools.ItemBuilder;
 import fr.rushcubeland.rcbhub.RcbHub;
 import fr.rushcubeland.rcbhub.gui.MainGUI;
 import fr.rushcubeland.rcbhub.gui.StatsGUI;
@@ -13,6 +13,7 @@ import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
 import fr.rushcubeland.rcbhub.parcours.Parcours;
 import fr.rushcubeland.rcbhub.tasks.ParcoursTask;
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -32,6 +33,13 @@ public class PlayerInteract implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent event){
         Player player = event.getPlayer();
+        if(event.getAction() == Action.RIGHT_CLICK_BLOCK){
+            Block b = event.getClickedBlock();
+            if(b != null){
+                // Ostracon & Treasure handler
+
+            }
+        }
         if(event.getItem() == null || event.getHand() == null){
             return;
         }

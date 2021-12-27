@@ -1,8 +1,8 @@
 package fr.rushcubeland.rcbhub.listeners;
 
-import fr.rushcubeland.rcbapi.bukkit.BukkitSend;
-import fr.rushcubeland.rcbapi.bukkit.events.RightClickNPCEvent;
-import fr.rushcubeland.rcbapi.bukkit.queue.QueueUnit;
+import fr.rushcubeland.rcbcore.bukkit.BukkitSend;
+import fr.rushcubeland.rcbcore.bukkit.events.RightClickNPCEvent;
+import fr.rushcubeland.rcbcore.bukkit.queue.QueueUnit;
 import fr.rushcubeland.rcbhub.npc.NPCUnit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

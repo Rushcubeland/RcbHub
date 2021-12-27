@@ -2,8 +2,8 @@ package fr.rushcubeland.rcbhub.gui;
 
 import fr.rushcubeland.commons.cosmetics.ParticlesUnit;
 import fr.rushcubeland.commons.cosmetics.PetsUnit;
-import fr.rushcubeland.rcbapi.bukkit.cosmetics.type.ParticleEffectType;
-import fr.rushcubeland.rcbapi.bukkit.tools.ItemBuilder;
+import fr.rushcubeland.rcbcore.bukkit.cosmetics.type.ParticleEffectType;
+import fr.rushcubeland.rcbcore.bukkit.tools.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
