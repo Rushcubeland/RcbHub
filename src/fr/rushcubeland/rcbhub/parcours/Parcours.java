@@ -17,6 +17,14 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 
+/**
+ * This class file is a part of RcbHub project claimed by Rushcubeland project.
+ * You cannot redistribute, modify or use it for personnal or commercial purposes
+ * please contact admin@rushcubeland.fr for any requests or information about that.
+ *
+ * @author LANNUZEL Dylan
+ */
+
 public class Parcours {
 
     private static final HashMap<Player, CheckPointUnit> parcoursDataPlayers = new HashMap<>();
@@ -84,10 +92,7 @@ public class Parcours {
                     PlayerJoin.giveJoinItems(player);
                     AStats aStats = RcbAPI.getInstance().getAccountStats(player);
                     long currentTimer = aStats.getParcoursTimer();
-                    if(currentTimer == null){
-                        aStats.setParcoursTimer(timer);
-                    }
-                    else if(timer < currentTimer){
+                    if(timer < currentTimer){
                         player.sendMessage("§6Félicitations, Vous avez battu votre §crecord personnel !");
                         aStats.setParcoursTimer(timer);
                     }

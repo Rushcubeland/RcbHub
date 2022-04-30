@@ -12,6 +12,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * This class file is a part of RcbHub project claimed by Rushcubeland project.
+ * You cannot redistribute, modify or use it for personnal or commercial purposes
+ * please contact admin@rushcubeland.fr for any requests or information about that.
+ *
+ * @author LANNUZEL Dylan
+ */
+
 public class InventoryClick implements Listener {
 
     @EventHandler
@@ -23,22 +31,24 @@ public class InventoryClick implements Listener {
             if(current == null){
                 return;
             }
-            if(event.getInventory().equals(StatsGUI.getSpecifiedInv(player))){
-                if(current.getType().equals(Material.ACACIA_DOOR)){
-                    player.closeInventory();
+            if(event.getClick().isLeftClick()){
+                if(event.getInventory().equals(StatsGUI.getSpecifiedInv(player))){
+                    if(current.getType().equals(Material.ACACIA_DOOR)){
+                        player.closeInventory();
+                    }
                 }
-            }
-            if(event.getInventory().equals(MainGUI.getSpecifiedInv(player))){
-                if(current.getType().equals(Material.ACACIA_DOOR)){
-                    player.closeInventory();
-                }
-                if(current.getType().equals(Material.WATER_BUCKET)){
-                    BukkitSend.requestJoinQueue(player, QueueUnit.DE_A_COUDRE);
-                    player.closeInventory();
-                }
-                if(current.getType().equals(Material.GOLDEN_BOOTS)){
-                    player.closeInventory();
-                    player.teleport(LocationUnit.PARCOURS.getLocation());
+                if(event.getInventory().equals(MainGUI.getSpecifiedInv(player))){
+                    if(current.getType().equals(Material.ACACIA_DOOR)){
+                        player.closeInventory();
+                    }
+                    if(current.getType().equals(Material.WATER_BUCKET)){
+                        BukkitSend.requestJoinQueue(player, QueueUnit.DE_A_COUDRE);
+                        player.closeInventory();
+                    }
+                    if(current.getType().equals(Material.GOLDEN_BOOTS)){
+                        player.closeInventory();
+                        player.teleport(LocationUnit.PARCOURS.getLocation());
+                    }
                 }
             }
         }

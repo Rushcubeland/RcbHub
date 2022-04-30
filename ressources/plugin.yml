@@ -6,4 +6,4 @@ api-version: 1.15
 depend: [RcbCore]
 commands:
   coins:
-    description: Commande pour afficher la solde de coins
+    description: Commande pour afficher le solde de coins

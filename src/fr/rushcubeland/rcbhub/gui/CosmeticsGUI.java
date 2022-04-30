@@ -2,13 +2,20 @@ package fr.rushcubeland.rcbhub.gui;
 
 import fr.rushcubeland.commons.cosmetics.ParticlesUnit;
 import fr.rushcubeland.commons.cosmetics.PetsUnit;
-import fr.rushcubeland.rcbcore.bukkit.cosmetics.type.ParticleEffectType;
 import fr.rushcubeland.rcbcore.bukkit.tools.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+/**
+ * This class file is a part of RcbHub project claimed by Rushcubeland project.
+ * You cannot redistribute, modify or use it for personnal or commercial purposes
+ * please contact admin@rushcubeland.fr for any requests or information about that.
+ *
+ * @author LANNUZEL Dylan
+ */
 
 public class CosmeticsGUI {
 
@@ -46,8 +53,8 @@ public class CosmeticsGUI {
         int i = 19;
 
         for(ParticlesUnit particlesUnit : ParticlesUnit.values()){
-            ItemStack p = new ItemBuilder(ParticleEffectType.valueOf(particlesUnit.getName()).getMaterial()).setName(particlesUnit.getName()).removeFlags().toItemStack();
-            inventory.setItem(i, p);
+            //ItemStack p = new ItemBuilder(ParticleEffectType.valueOf(particlesUnit.getName()).getMaterial()).setName(particlesUnit.getName()).removeFlags().toItemStack();
+            //inventory.setItem(i, p);
             i += 1;
         }
 

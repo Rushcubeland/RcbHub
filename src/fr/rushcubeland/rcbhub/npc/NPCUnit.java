@@ -7,6 +7,14 @@ import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * This file is a part of RcbHub project claimed by Rushcubeland project.
+ * You cannot redistribute, modify or use it for personnal or commercial purposes
+ * please contact admin@rushcubeland.fr for any requests or information about that.
+ *
+ * @author LANNUZEL Dylan
+ */
+
 public enum NPCUnit {
 
     DE_A_COUDRE(ChatColor.AQUA + "Dé à Coudre", Bukkit.getWorld(MapUnit.LOBBY.getPath()), new Location(null, 65.5, 187, 11.5, 137, 0),

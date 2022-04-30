@@ -1,7 +1,6 @@
 package fr.rushcubeland.rcbhub.tasks;
 
 import fr.rushcubeland.commons.Account;
-import fr.rushcubeland.commons.data.redis.RedisAccess;
 import fr.rushcubeland.rcbcore.bukkit.RcbAPI;
 import fr.rushcubeland.rcbcore.bukkit.network.Network;
 import fr.rushcubeland.rcbcore.bukkit.tools.ScoreboardSign;
@@ -10,10 +9,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.redisson.api.RBucket;
-import org.redisson.api.RedissonClient;
 
 import java.util.Map;
+
+/**
+ * This class file is a part of RcbHub project claimed by Rushcubeland project.
+ * You cannot redistribute, modify or use it for personnal or commercial purposes
+ * please contact admin@rushcubeland.fr for any requests or information about that.
+ *
+ * @author LANNUZEL Dylan
+ */
 
 public class ScoreboardReloadTask extends BukkitRunnable {
 

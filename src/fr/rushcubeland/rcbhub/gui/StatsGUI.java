@@ -18,6 +18,14 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.TimeZone;
 
+/**
+ * This class file is a part of RcbHub project claimed by Rushcubeland project.
+ * You cannot redistribute, modify or use it for personnal or commercial purposes
+ * please contact admin@rushcubeland.fr for any requests or information about that.
+ *
+ * @author LANNUZEL Dylan
+ */
+
 public class StatsGUI {
 
     private static final HashMap<Player, Inventory> GUI = new HashMap<>();

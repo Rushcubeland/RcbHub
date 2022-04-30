@@ -26,6 +26,14 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.HashMap;
 
+/**
+ * This class file is a part of RcbHub project claimed by Rushcubeland project.
+ * You cannot redistribute, modify or use it for personnal or commercial purposes
+ * please contact admin@rushcubeland.fr for any requests or information about that.
+ *
+ * @author LANNUZEL Dylan
+ */
+
 public class PlayerInteract implements Listener {
 
     private final HashMap<Player, Boolean> dataTartareShadow = new HashMap<>();
@@ -33,13 +41,6 @@ public class PlayerInteract implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent event){
         Player player = event.getPlayer();
-        if(event.getAction() == Action.RIGHT_CLICK_BLOCK){
-            Block b = event.getClickedBlock();
-            if(b != null){
-                // Ostracon & Treasure handler
-
-            }
-        }
         if(event.getItem() == null || event.getHand() == null){
             return;
         }
