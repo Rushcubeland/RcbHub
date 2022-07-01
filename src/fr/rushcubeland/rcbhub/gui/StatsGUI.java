@@ -30,7 +30,7 @@ public class StatsGUI {
 
     private static final HashMap<Player, Inventory> GUI = new HashMap<>();
 
-    public static void OpenInv(Player player){
+    public static void openInv(Player player){
 
         Inventory inventory = Bukkit.createInventory(null, 54, "§cStatistiques");
         initGlass(inventory, Material.GREEN_STAINED_GLASS_PANE);
@@ -49,7 +49,9 @@ public class StatsGUI {
         }
 
         SkullMeta headpm = (SkullMeta) headp.getItemMeta();
-        headpm.setOwningPlayer(player);
+        if (headpm != null) {
+            headpm.setOwningPlayer(player);
+        }
         headp.setItemMeta(headpm);
         inventory.setItem(4, headp);
 

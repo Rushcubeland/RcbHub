@@ -26,7 +26,7 @@ public class MainGUI {
 
     private static final HashMap<Player, Inventory> GUI = new HashMap<>();
 
-    public static void OpenInv(Player player){
+    public static void openInv(Player player){
 
         Inventory inventory = Bukkit.createInventory(null, 54, "§6Menu Principal");
         initGlass(inventory, Material.CYAN_STAINED_GLASS_PANE);

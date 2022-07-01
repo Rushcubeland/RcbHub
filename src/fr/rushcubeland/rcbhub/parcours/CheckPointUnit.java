@@ -77,7 +77,7 @@ public enum CheckPointUnit {
         }
     }
 
-    public static void HideHolograms(Player player){
+    public static void hideHolograms(Player player){
         for(CheckPointUnit checkPoint : CheckPointUnit.values()){
             checkPoint.hologram.removeReceiver(player);
         }

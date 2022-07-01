@@ -13,7 +13,6 @@ import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
 import fr.rushcubeland.rcbhub.parcours.Parcours;
 import fr.rushcubeland.rcbhub.tasks.ParcoursTask;
 import org.bukkit.*;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -63,10 +62,10 @@ public class PlayerInteract implements Listener {
                 player.sendMessage("§eVous avez rejoin le dernier §cCheckpoint !");
             }
             if(current.getType().equals(Material.COMPASS)){
-                MainGUI.OpenInv(player);
+                MainGUI.openInv(player);
             }
             if(current.getType().equals(Material.PLAYER_HEAD)){
-                StatsGUI.OpenInv(player);
+                StatsGUI.openInv(player);
             }
             if(current.getType().equals(Material.COMPARATOR)){
                 BukkitSend.CmdToProxy(player, "opt");
