@@ -45,61 +45,50 @@ public class Parcours {
 
         }
         else if(CheckPointUnit.locationMatch(CheckPointUnit.FIRST_CHECKPOINT, blockLocation)){
-            if(Parcours.getParcoursDataPlayers().containsKey(player)){
-                if(Parcours.getParcoursDataPlayers().get(player).equals(CheckPointUnit.START)){
-                    Parcours.getParcoursDataPlayers().put(player, CheckPointUnit.FIRST_CHECKPOINT);
-                    player.sendMessage("§eVous avez passé " + CheckPointUnit.FIRST_CHECKPOINT.getName());
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1F, 1F);
-                }
+            if(Parcours.getParcoursDataPlayers().containsKey(player) && Parcours.getParcoursDataPlayers().get(player).equals(CheckPointUnit.START)){
+                Parcours.getParcoursDataPlayers().put(player, CheckPointUnit.FIRST_CHECKPOINT);
+                player.sendMessage("§eVous avez passé " + CheckPointUnit.FIRST_CHECKPOINT.getName());
+                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1F, 1F);
             }
 
         }
         else if(CheckPointUnit.locationMatch(CheckPointUnit.SND_CHECKPOINT, blockLocation)){
-            if(Parcours.getParcoursDataPlayers().containsKey(player)){
-                if(Parcours.getParcoursDataPlayers().get(player).equals(CheckPointUnit.FIRST_CHECKPOINT)){
-                    Parcours.getParcoursDataPlayers().put(player, CheckPointUnit.SND_CHECKPOINT);
-                    player.sendMessage("§eVous avez passé " + CheckPointUnit.SND_CHECKPOINT.getName());
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1F, 1F);
-                }
+            if(Parcours.getParcoursDataPlayers().containsKey(player) && Parcours.getParcoursDataPlayers().get(player).equals(CheckPointUnit.FIRST_CHECKPOINT)){
+                Parcours.getParcoursDataPlayers().put(player, CheckPointUnit.SND_CHECKPOINT);
+                player.sendMessage("§eVous avez passé " + CheckPointUnit.SND_CHECKPOINT.getName());
+                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1F, 1F);
             }
 
         }
         else if(CheckPointUnit.locationMatch(CheckPointUnit.THIRD_CHECKPOINT, blockLocation)){
-            if(Parcours.getParcoursDataPlayers().containsKey(player)){
-                if(Parcours.getParcoursDataPlayers().get(player).equals(CheckPointUnit.SND_CHECKPOINT)){
-                    Parcours.getParcoursDataPlayers().put(player, CheckPointUnit.THIRD_CHECKPOINT);
-                    player.sendMessage("§eVous avez passé " + CheckPointUnit.THIRD_CHECKPOINT.getName());
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1F, 1F);
-                }
+            if(Parcours.getParcoursDataPlayers().containsKey(player) && Parcours.getParcoursDataPlayers().get(player).equals(CheckPointUnit.SND_CHECKPOINT)){
+                Parcours.getParcoursDataPlayers().put(player, CheckPointUnit.THIRD_CHECKPOINT);
+                player.sendMessage("§eVous avez passé " + CheckPointUnit.THIRD_CHECKPOINT.getName());
+                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1F, 1F);
             }
 
         }
-        else if(CheckPointUnit.locationMatch(CheckPointUnit.END, blockLocation)){
-            if(Parcours.getParcoursDataPlayers().containsKey(player)){
-                if(Parcours.getParcoursDataPlayers().get(player).equals(CheckPointUnit.THIRD_CHECKPOINT)){
-                    Parcours.getParcoursDataPlayers().remove(player);
-                    ParcoursTask.stopParcoursTask(player);
-                    long timer = getParcoursTimersPlayers().get(player);
-                    String timerFormat = DurationFormatUtils.formatDurationHMS(timer);
-                    Parcours.getParcoursTimersPlayers().remove(player);
-                    player.sendMessage("§eVous avez passé " + CheckPointUnit.END.getName());
-                    player.sendMessage("§6Vous avez terminé le parcours en §c" + timerFormat);
-                    Account account = RcbAPI.getInstance().getAccount(player);
-                    Bukkit.broadcastMessage(account.getRank().getPrefix() + player.getDisplayName() + " §ea terminé le parcours en §c" + timerFormat);
-                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1F, 1F);
-                    player.teleport(LocationUnit.LOBBY.getLocation());
-                    PlayerJoin.initFlyPlayer(player, account.getRank());
-                    PlayerJoin.giveJoinItems(player);
-                    AStats aStats = RcbAPI.getInstance().getAccountStats(player);
-                    long currentTimer = aStats.getParcoursTimer();
-                    if(timer < currentTimer){
-                        player.sendMessage("§6Félicitations, Vous avez battu votre §crecord personnel !");
-                        aStats.setParcoursTimer(timer);
-                    }
-                    RcbAPI.getInstance().sendAStatsToRedis(aStats);
-                }
+        else if(CheckPointUnit.locationMatch(CheckPointUnit.END, blockLocation) && Parcours.getParcoursDataPlayers().containsKey(player) && Parcours.getParcoursDataPlayers().get(player).equals(CheckPointUnit.THIRD_CHECKPOINT)){
+            Parcours.getParcoursDataPlayers().remove(player);
+            ParcoursTask.stopParcoursTask(player);
+            long timer = getParcoursTimersPlayers().get(player);
+            String timerFormat = DurationFormatUtils.formatDurationHMS(timer);
+            Parcours.getParcoursTimersPlayers().remove(player);
+            player.sendMessage("§eVous avez passé " + CheckPointUnit.END.getName());
+            player.sendMessage("§6Vous avez terminé le parcours en §c" + timerFormat);
+            Account account = RcbAPI.getInstance().getAccount(player);
+            Bukkit.broadcastMessage(account.getRank().getPrefix() + player.getDisplayName() + " §ea terminé le parcours en §c" + timerFormat);
+            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1F, 1F);
+            player.teleport(LocationUnit.LOBBY.getLocation());
+            PlayerJoin.initFlyPlayer(player, account.getRank());
+            PlayerJoin.giveJoinItems(player);
+            AStats aStats = RcbAPI.getInstance().getAccountStats(player);
+            long currentTimer = aStats.getParcoursTimer();
+            if(timer < currentTimer){
+                player.sendMessage("§6Félicitations, Vous avez battu votre §crecord personnel !");
+                aStats.setParcoursTimer(timer);
             }
-
+            RcbAPI.getInstance().sendAStatsToRedis(aStats);
         }
     }
 

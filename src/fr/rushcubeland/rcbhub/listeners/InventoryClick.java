@@ -32,10 +32,8 @@ public class InventoryClick implements Listener {
                 return;
             }
             if(event.getClick().isLeftClick()){
-                if(event.getInventory().equals(StatsGUI.getSpecifiedInv(player))){
-                    if(current.getType().equals(Material.ACACIA_DOOR)){
-                        player.closeInventory();
-                    }
+                if(event.getInventory().equals(StatsGUI.getSpecifiedInv(player)) && current.getType().equals(Material.ACACIA_DOOR)){
+                    player.closeInventory();
                 }
                 if(event.getInventory().equals(MainGUI.getSpecifiedInv(player))){
                     if(current.getType().equals(Material.ACACIA_DOOR)){

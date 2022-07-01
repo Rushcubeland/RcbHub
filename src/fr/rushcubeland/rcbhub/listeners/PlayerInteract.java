@@ -45,64 +45,49 @@ public class PlayerInteract implements Listener {
             return;
         }
         ItemStack current = event.getItem();
-        if(event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR){
-            if(event.getHand().equals(EquipmentSlot.HAND)){
-                if(current.getType().equals(Material.RED_BED)){
-                    if(Parcours.getParcoursDataPlayers().containsKey(player)){
-                        player.teleport(LocationUnit.LOBBY.getLocation());
-                        player.sendMessage("§cVous avez quitter le parcours !");
-                        ParcoursTask.stopParcoursTask(player);
-                        Parcours.getParcoursTimersPlayers().remove(player);
-                        Parcours.getParcoursDataPlayers().remove(player);
-                        Account account = RcbAPI.getInstance().getAccount(player);
-                        PlayerJoin.initFlyPlayer(player, account.getRank());
-                        PlayerJoin.giveJoinItems(player);
-                    }
+        if(event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR && event.getHand().equals(EquipmentSlot.HAND)){
+            if(current.getType().equals(Material.RED_BED) && Parcours.getParcoursDataPlayers().containsKey(player)){
+                player.teleport(LocationUnit.LOBBY.getLocation());
+                player.sendMessage("§cVous avez quitter le parcours !");
+                ParcoursTask.stopParcoursTask(player);
+                Parcours.getParcoursTimersPlayers().remove(player);
+                Parcours.getParcoursDataPlayers().remove(player);
+                Account account = RcbAPI.getInstance().getAccount(player);
+                PlayerJoin.initFlyPlayer(player, account.getRank());
+                PlayerJoin.giveJoinItems(player);
+            }
+            if(current.getType().equals(Material.SLIME_BALL) && Parcours.getParcoursDataPlayers().containsKey(player)){
+                CheckPointUnit checkPointUnit = Parcours.getParcoursDataPlayers().get(player);
+                Location location = new Location(Bukkit.getWorld(MapUnit.LOBBY.getPath()), checkPointUnit.getX(), checkPointUnit.getY()+1, checkPointUnit.getZ());
+                player.teleport(location);
+                player.sendMessage("§eVous avez rejoin le dernier §cCheckpoint !");
+            }
+            if(current.getType().equals(Material.COMPASS)){
+                MainGUI.OpenInv(player);
+            }
+            if(current.getType().equals(Material.PLAYER_HEAD)){
+                StatsGUI.OpenInv(player);
+            }
+            if(current.getType().equals(Material.COMPARATOR)){
+                BukkitSend.CmdToProxy(player, "opt");
+            }
+            if(current.getType().equals(Material.PUFFERFISH)){
+                BukkitSend.CmdToProxy(player, "friend list");
+            }
+            if(current.getType().equals(Material.CLOCK)){
+                if(Bukkit.getOnlinePlayers().size() <= 1){
+                    return;
                 }
-                if(current.getType().equals(Material.SLIME_BALL)){
-                    if(Parcours.getParcoursDataPlayers().containsKey(player)){
-                        CheckPointUnit checkPointUnit = Parcours.getParcoursDataPlayers().get(player);
-                        Location location = new Location(Bukkit.getWorld(MapUnit.LOBBY.getPath()), checkPointUnit.getX(), checkPointUnit.getY()+1, checkPointUnit.getZ());
-                        player.teleport(location);
-                        player.sendMessage("§eVous avez rejoin le dernier §cCheckpoint !");
-                    }
-                }
-                if(current.getType().equals(Material.COMPASS)){
-                    MainGUI.OpenInv(player);
-                }
-                if(current.getType().equals(Material.PLAYER_HEAD)){
-                    StatsGUI.OpenInv(player);
-                }
-                if(current.getType().equals(Material.COMPARATOR)){
-                    BukkitSend.CmdToProxy(player, "opt");
-                }
-                if(current.getType().equals(Material.PUFFERFISH)){
-                    BukkitSend.CmdToProxy(player, "friend list");
-                }
-                if(current.getType().equals(Material.CLOCK)){
-                    if(Bukkit.getOnlinePlayers().size() <= 1){
-                        return;
-                    }
-                    if(dataTartareShadow.containsKey(player)){
-                        if(dataTartareShadow.get(player).equals(true)){
-                            dataTartareShadow.put(player, false);
-                            ItemStack magicClock = new ItemBuilder(Material.CLOCK).setName("§7Ombre de Tartare: §cDésactivé").setLore("§f ", "").toItemStack();
-                            player.getInventory().setItem(4, magicClock);
-                            for(Player pls : Bukkit.getOnlinePlayers()){
-                                player.showPlayer(RcbHub.getInstance(), pls);
-                            }
-                        }
-                        else {
-                            dataTartareShadow.put(player, true);
-                            ItemStack magicClock = new ItemBuilder(Material.CLOCK).setName("§7Ombre de Tartare: §aActivé").setLore("§f ", "").toItemStack();
-                            player.getInventory().setItem(4, magicClock);
-                            for(Player pls : Bukkit.getOnlinePlayers()){
-                                player.hidePlayer(RcbHub.getInstance(), pls);
-                            }
+                if(dataTartareShadow.containsKey(player)){
+                    if(dataTartareShadow.get(player).equals(true)){
+                        dataTartareShadow.put(player, false);
+                        ItemStack magicClock = new ItemBuilder(Material.CLOCK).setName("§7Ombre de Tartare: §cDésactivé").setLore("§f ", "").toItemStack();
+                        player.getInventory().setItem(4, magicClock);
+                        for(Player pls : Bukkit.getOnlinePlayers()){
+                            player.showPlayer(RcbHub.getInstance(), pls);
                         }
                     }
-                    else
-                    {
+                    else {
                         dataTartareShadow.put(player, true);
                         ItemStack magicClock = new ItemBuilder(Material.CLOCK).setName("§7Ombre de Tartare: §aActivé").setLore("§f ", "").toItemStack();
                         player.getInventory().setItem(4, magicClock);
@@ -110,9 +95,18 @@ public class PlayerInteract implements Listener {
                             player.hidePlayer(RcbHub.getInstance(), pls);
                         }
                     }
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 30, 1));
-                    player.playSound(player.getLocation(), Sound.ENTITY_PHANTOM_AMBIENT, SoundCategory.AMBIENT, 1F, 1F);
                 }
+                else
+                {
+                    dataTartareShadow.put(player, true);
+                    ItemStack magicClock = new ItemBuilder(Material.CLOCK).setName("§7Ombre de Tartare: §aActivé").setLore("§f ", "").toItemStack();
+                    player.getInventory().setItem(4, magicClock);
+                    for(Player pls : Bukkit.getOnlinePlayers()){
+                        player.hidePlayer(RcbHub.getInstance(), pls);
+                    }
+                }
+                player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 30, 1));
+                player.playSound(player.getLocation(), Sound.ENTITY_PHANTOM_AMBIENT, SoundCategory.AMBIENT, 1F, 1F);
             }
         }
     }
