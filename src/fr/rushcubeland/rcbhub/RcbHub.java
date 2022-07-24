@@ -3,8 +3,6 @@ package fr.rushcubeland.rcbhub;
 import fr.rushcubeland.rcbhub.listeners.*;
 import fr.rushcubeland.rcbhub.npc.NPCUnit;
 import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
-import fr.rushcubeland.rcbhub.enigma.OstraconUnit;
-import fr.rushcubeland.rcbhub.enigma.TreasureUnit;
 import fr.rushcubeland.rcbhub.tasks.ScoreboardReloadTask;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -22,9 +20,6 @@ public class RcbHub extends JavaPlugin {
 
         String channel = "rcbapi:main";
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, channel);
-
-        OstraconUnit.placeOstracons();
-        TreasureUnit.placeTreasures();
 
         NPCUnit.createAll();
         CheckPointUnit.placeHolograms();

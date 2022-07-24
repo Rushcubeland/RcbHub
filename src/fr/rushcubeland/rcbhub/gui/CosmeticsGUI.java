@@ -2,7 +2,6 @@ package fr.rushcubeland.rcbhub.gui;
 
 import fr.rushcubeland.commons.cosmetics.ParticlesUnit;
 import fr.rushcubeland.commons.cosmetics.PetsUnit;
-import fr.rushcubeland.rcbcore.bukkit.cosmetics.type.ParticleEffectType;
 import fr.rushcubeland.rcbcore.bukkit.tools.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -28,12 +27,10 @@ public class CosmeticsGUI {
 
         ItemStack pets = new ItemBuilder(Material.CARROT_ON_A_STICK).setName("§eCompagnon").removeFlags().toItemStack();
         inventory.setItem(20, pets);
-
         ItemStack close = new ItemBuilder(Material.ACACIA_DOOR).setName("§cFermer").toItemStack();
         inventory.setItem(49, close);
 
         player.openInventory(inventory);
-
 
     }
 
@@ -46,7 +43,7 @@ public class CosmeticsGUI {
         int i = 19;
 
         for(ParticlesUnit particlesUnit : ParticlesUnit.values()){
-            ItemStack p = new ItemBuilder(ParticleEffectType.valueOf(particlesUnit.getName()).getMaterial()).setName(particlesUnit.getName()).removeFlags().toItemStack();
+            ItemStack p = new ItemBuilder(Material.BARRIER).setName(particlesUnit.getName()).removeFlags().toItemStack();
             inventory.setItem(i, p);
             i += 1;
         }
@@ -68,10 +65,7 @@ public class CosmeticsGUI {
             inventory.setItem(i, p);
             i += 1;
         }
-
         player.openInventory(inventory);
-
-
     }
 
     private static void initGlass(Inventory inventory, Material material){

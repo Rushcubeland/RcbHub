@@ -33,13 +33,6 @@ public class PlayerInteract implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent event){
         Player player = event.getPlayer();
-        if(event.getAction() == Action.RIGHT_CLICK_BLOCK){
-            Block b = event.getClickedBlock();
-            if(b != null){
-                // Ostracon & Treasure handler
-
-            }
-        }
         if(event.getItem() == null || event.getHand() == null){
             return;
         }
@@ -73,10 +66,10 @@ public class PlayerInteract implements Listener {
                     StatsGUI.OpenInv(player);
                 }
                 if(current.getType().equals(Material.COMPARATOR)){
-                    BukkitSend.CmdToProxy(player, "opt");
+                    BukkitSend.cmdToProxy(player, "opt");
                 }
                 if(current.getType().equals(Material.PUFFERFISH)){
-                    BukkitSend.CmdToProxy(player, "friend list");
+                    BukkitSend.cmdToProxy(player, "friend list");
                 }
                 if(current.getType().equals(Material.CLOCK)){
                     if(Bukkit.getOnlinePlayers().size() <= 1){

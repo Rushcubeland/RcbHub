@@ -2,6 +2,7 @@ package fr.rushcubeland.rcbhub.parcours;
 
 import fr.rushcubeland.commons.AStats;
 import fr.rushcubeland.commons.Account;
+import fr.rushcubeland.commons.data.callbacks.AsyncCallBack;
 import fr.rushcubeland.rcbcore.bukkit.RcbAPI;
 import fr.rushcubeland.rcbcore.bukkit.tools.ItemBuilder;
 import fr.rushcubeland.rcbhub.listeners.PlayerJoin;
@@ -82,16 +83,21 @@ public class Parcours {
                     player.teleport(LocationUnit.LOBBY.getLocation());
                     PlayerJoin.initFlyPlayer(player, account.getRank());
                     PlayerJoin.giveJoinItems(player);
-                    AStats aStats = RcbAPI.getInstance().getAccountStats(player);
-                    long currentTimer = aStats.getParcoursTimer();
-                    if(currentTimer == null){
-                        aStats.setParcoursTimer(timer);
-                    }
-                    else if(timer < currentTimer){
-                        player.sendMessage("§6Félicitations, Vous avez battu votre §crecord personnel !");
-                        aStats.setParcoursTimer(timer);
-                    }
-                    RcbAPI.getInstance().sendAStatsToRedis(aStats);
+                    RcbAPI.getInstance().getAccountStats(player, new AsyncCallBack() {
+                        @Override
+                        public void onQueryComplete(Object result) {
+                            AStats aStats = (AStats) result;
+                            long currentTimer = aStats.getParcoursTimer();
+                            if(currentTimer == 0L){
+                                aStats.setParcoursTimer(timer);
+                            }
+                            else if(timer < currentTimer){
+                                player.sendMessage("§6Félicitations, Vous avez battu votre §crecord personnel !");
+                                aStats.setParcoursTimer(timer);
+                            }
+                            RcbAPI.getInstance().sendAStatsToRedis(aStats);
+                        }
+                    });
                 }
             }
 

@@ -3,6 +3,7 @@ package fr.rushcubeland.rcbhub.listeners;
 import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.commons.rank.RankUnit;
 import fr.rushcubeland.rcbcore.bukkit.RcbAPI;
+import fr.rushcubeland.rcbcore.bukkit.listeners.JoinEvent;
 import fr.rushcubeland.rcbcore.bukkit.tools.ItemBuilder;
 import fr.rushcubeland.rcbcore.bukkit.tools.NPC;
 import fr.rushcubeland.rcbcore.bukkit.tools.ScoreboardSign;
@@ -82,28 +83,7 @@ public class PlayerJoin implements Listener {
     }
 
     public static void giveJoinItems(Player player){
-        ItemStack menup = new ItemBuilder(Material.COMPASS).setName("§6Menu Principal").setLore("§f ", "").toItemStack();
-        menup.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
-        ItemMeta menupm = menup.getItemMeta();
-        menupm.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        menup.setItemMeta(menupm);
-
-        ItemStack settings = new ItemBuilder(Material.COMPARATOR).setName("§cPréférences").setLore("§f ", "").toItemStack();
-
-        ItemStack magicClock = new ItemBuilder(Material.CLOCK).setName("§7Ombre de Tartare: §cDésactivé").setLore("§f ", "").toItemStack();
-
-        ItemStack profil = new ItemBuilder(Material.PLAYER_HEAD).setName("§eVotre profil").setLore("§f ", "").toItemStack();
-        SkullMeta profilm = (SkullMeta) profil.getItemMeta();
-        profilm.setOwningPlayer(player);
-        profil.setItemMeta(profilm);
-
-        ItemStack amis = new ItemBuilder(Material.PUFFERFISH).setName("§eAmis").setLore("§f ", "").removeFlags().toItemStack();
-
-        player.getInventory().setItem(0, menup);
-        player.getInventory().setItem(4, magicClock);
-        player.getInventory().setItem(8, settings);
-        player.getInventory().setItem(1, profil);
-        player.getInventory().setItem(6, amis);
+        JoinEvent.giveLobbyJoinItems(player);
     }
 
 }
