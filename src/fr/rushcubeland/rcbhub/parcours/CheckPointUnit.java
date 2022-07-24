@@ -6,6 +6,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+/**
+ * This file is a part of RcbHub project claimed by Rushcubeland project.
+ * You cannot redistribute, modify or use it for personnal or commercial purposes
+ * please contact admin@rushcubeland.fr for any requests or information about that.
+ *
+ * @author LANNUZEL Dylan
+ */
+
 public enum CheckPointUnit {
 
     START("le §6Départ", -89, 253, -19, new String[]{"§eParcours", "§6Départ"}),
@@ -69,7 +77,7 @@ public enum CheckPointUnit {
         }
     }
 
-    public static void HideHolograms(Player player){
+    public static void hideHolograms(Player player){
         for(CheckPointUnit checkPoint : CheckPointUnit.values()){
             checkPoint.hologram.removeReceiver(player);
         }

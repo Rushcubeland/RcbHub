@@ -21,18 +21,24 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import java.util.ArrayList;
 
+/**
+ * This class file is a part of RcbHub project claimed by Rushcubeland project.
+ * You cannot redistribute, modify or use it for personnal or commercial purposes
+ * please contact admin@rushcubeland.fr for any requests or information about that.
+ *
+ * @author LANNUZEL Dylan
+ */
+
 public class PlayerChat implements Listener {
 
     @EventHandler(priority = EventPriority.LOW)
     public void onChat(AsyncPlayerChatEvent event){
         Player player = event.getPlayer();
         String message = event.getMessage();
-        if(MuteData.isInMuteData(player.getUniqueId().toString())){
-            if(!message.startsWith("/")){
-                event.setCancelled(true);
-                player.sendMessage("§cVous avez été mute !");
-                return;
-            }
+        if(MuteData.isInMuteData(player.getUniqueId().toString()) && !message.startsWith("/")){
+            event.setCancelled(true);
+            player.sendMessage("§cVous avez été mute !");
+            return;
         }
         if(ReportMsgCommand.msgs.containsKey(player.getName())){
             ReportMsgCommand.msgs.get(player.getName()).add(message);
