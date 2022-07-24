@@ -3,6 +3,8 @@ package fr.rushcubeland.rcbhub.listeners;
 import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.commons.rank.RankUnit;
 import fr.rushcubeland.rcbcore.bukkit.RcbAPI;
+import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
+import fr.rushcubeland.rcbhub.parcours.Parcours;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,6 +23,9 @@ public class PlayerQuit implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event){
         Player player = event.getPlayer();
+
+        Parcours.getParcoursDataPlayers().remove(player);
+        Parcours.getParcoursTimersPlayers().remove(player);
 
         if(RcbAPI.getInstance().boards.containsKey(player)){
             RcbAPI.getInstance().boards.get(player).destroy();

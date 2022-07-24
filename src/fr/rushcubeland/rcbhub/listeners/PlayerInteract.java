@@ -60,7 +60,7 @@ public class PlayerInteract implements Listener {
                     }
                 }
                 if(current.getType().equals(Material.COMPASS)){
-                    MainGUI.OpenInv(player);
+                    MainGUI.openInv(player);
                 }
                 if(current.getType().equals(Material.PLAYER_HEAD)){
                     StatsGUI.OpenInv(player);

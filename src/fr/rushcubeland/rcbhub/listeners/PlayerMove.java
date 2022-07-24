@@ -31,7 +31,7 @@ public class PlayerMove implements Listener {
             Location blockLocation = player.getLocation().getBlock().getRelative(BlockFace.DOWN).getLocation();
             Parcours.checkpointPassed(player, blockLocation);
         }
-        if(player.getLocation().getY() <= 192 || player.getLocation().getBlock().isLiquid() && Parcours.getParcoursDataPlayers().containsKey(player)){
+        if(player.getLocation().getY() <= 192 && player.getLocation().getBlock().isLiquid() && Parcours.getParcoursDataPlayers().containsKey(player)){
             CheckPointUnit checkPointUnit = Parcours.getParcoursDataPlayers().get(player);
             Location location = new Location(Bukkit.getWorld(MapUnit.LOBBY.getPath()), checkPointUnit.getX(), checkPointUnit.getY()+1, checkPointUnit.getZ());
             player.teleport(location);

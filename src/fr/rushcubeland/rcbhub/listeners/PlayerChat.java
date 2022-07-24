@@ -4,6 +4,8 @@ import fr.rushcubeland.commons.AOptions;
 import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.commons.data.callbacks.AsyncCallBack;
 import fr.rushcubeland.commons.options.OptionUnit;
+import fr.rushcubeland.commons.permissions.PermissionsUnit;
+import fr.rushcubeland.commons.rank.RankUnit;
 import fr.rushcubeland.rcbcore.bukkit.RcbAPI;
 import fr.rushcubeland.rcbcore.bukkit.commands.ReportMsgCommand;
 import fr.rushcubeland.rcbcore.bukkit.sanction.MuteData;
@@ -49,27 +51,30 @@ public class PlayerChat implements Listener {
             msgs.add(event.getMessage());
             ReportMsgCommand.msgs.put(player.getName(), msgs);
         }
-        RcbAPI.getInstance().getAccount(player, new AsyncCallBack() {
-            @Override
-            public void onQueryComplete(Object result) {
-                Account account = (Account) result;
-                TextComponent sign = new TextComponent("⚠");
-                TextComponent format = new TextComponent(account.getRank().getPrefix() + player.getDisplayName() + ": " + message);
-                sign.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Signaler le message").color(ChatColor.DARK_RED).create()));
-                sign.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/reportmsg " + player.getName() + " " + message));
-                format.setClickEvent(null);
-                format.setHoverEvent(null);
-                for(Player pls : Bukkit.getOnlinePlayers()) {
-                    RcbAPI.getInstance().getAccountOptions(pls, new AsyncCallBack() {
-                        @Override
-                        public void onQueryComplete(Object result) {
-                            AOptions aOptions = (AOptions) result;
-                            if (aOptions.getStateChat().equals(OptionUnit.OPEN)) {
-                                pls.spigot().sendMessage(new ComponentBuilder(sign).color(ChatColor.DARK_RED).append(format).reset().create());
-                            }
+        RcbAPI.getInstance().getAccount(player, result -> {
+            Account account = (Account) result;
+            TextComponent format = new TextComponent(account.getRank().getPrefix() + player.getDisplayName() + ": " + message);
+            format.setClickEvent(null);
+            format.setHoverEvent(null);
+            for(Player pls : Bukkit.getOnlinePlayers()) {
+                RcbAPI.getInstance().getAccountOptions(pls, result1 -> {
+                    AOptions aOptions = (AOptions) result1;
+                    TextComponent sign;
+                    if (aOptions.getStateChat().equals(OptionUnit.OPEN)) {
+                        if(pls.hasPermission(PermissionsUnit.ALL.getPermission()) || pls.hasPermission(PermissionsUnit.SANCTION_GUI.getPermission()) || pls.hasPermission(PermissionsUnit.SANCTION_GUI_MSG.getPermission())){
+                            sign = new TextComponent("⚒");
+                            sign.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Sanctionner").color(ChatColor.DARK_RED).create()));
+                            sign.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/apmsgb " + player.getName()));
                         }
-                    });
-                }
+                        else
+                        {
+                            sign = new TextComponent("⚠");
+                            sign.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Signaler le message").color(ChatColor.DARK_RED).create()));
+                            sign.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/reportmsg " + player.getName() + " " + message));
+                        }
+                        pls.spigot().sendMessage(new ComponentBuilder(sign).color(ChatColor.DARK_RED).append(format).reset().create());
+                    }
+                });
             }
         });
         event.setCancelled(true);
