@@ -1,9 +1,0 @@
-name: RcbHub
-author: didi955
-main: fr.rushcubeland.rcbhub.RcbHub
-version: 1.0-SNAPSHOT
-api-version: 1.15
-depend: [RcbCore]
-commands:
-  coins:
-    description: Commande pour afficher le solde de coins
