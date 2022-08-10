@@ -4,22 +4,15 @@ import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.commons.rank.RankUnit;
 import fr.rushcubeland.rcbcore.bukkit.RcbAPI;
 import fr.rushcubeland.rcbcore.bukkit.listeners.JoinEvent;
-import fr.rushcubeland.rcbcore.bukkit.tools.ItemBuilder;
 import fr.rushcubeland.rcbcore.bukkit.tools.NPC;
 import fr.rushcubeland.rcbcore.bukkit.tools.ScoreboardSign;
 import fr.rushcubeland.rcbhub.locations.LocationUnit;
 import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
 
 /**
  * This class file is a part of RcbHub project claimed by Rushcubeland project.
@@ -70,6 +63,10 @@ public class PlayerJoin implements Listener {
         if(rank.getPower() <= 40){
             player.setAllowFlight(true);
             player.setFlying(true);
+        }
+        else if(rank.getPower() < RankUnit.FIRST_LEVEL_RANK){
+            player.setAllowFlight(true);
+            Flight.allow.add(player);
         }
     }
 
