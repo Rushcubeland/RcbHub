@@ -13,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class file is a part of RcbHub project claimed by Rushcubeland project.
@@ -24,7 +25,11 @@ import java.util.HashMap;
 
 public class MainGUI {
 
-    private static final HashMap<Player, Inventory> GUI = new HashMap<>();
+    private MainGUI() {
+        throw new IllegalStateException("This class should not be instantiated");
+    }
+
+    private static final Map<Player, Inventory> GUI = new HashMap<>();
 
     public static void openInv(Player player){
 

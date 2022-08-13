@@ -3,7 +3,6 @@ package fr.rushcubeland.rcbhub.gui;
 import fr.rushcubeland.commons.AStats;
 import fr.rushcubeland.commons.AStatsDAC;
 import fr.rushcubeland.commons.Account;
-import fr.rushcubeland.commons.data.callbacks.AsyncCallBack;
 import fr.rushcubeland.commons.rank.RankUnit;
 import fr.rushcubeland.rcbcore.bukkit.RcbAPI;
 import fr.rushcubeland.rcbcore.bukkit.tools.ItemBuilder;
@@ -17,11 +16,16 @@ import org.bukkit.inventory.meta.SkullMeta;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
 
 public class StatsGUI {
 
-    private static final HashMap<Player, Inventory> GUI = new HashMap<>();
+    private StatsGUI() {
+        throw new IllegalStateException("This class should not be instantiated");
+    }
+
+    private static final Map<Player, Inventory> GUI = new HashMap<>();
 
     public static void OpenInv(Player player){
 
@@ -55,8 +59,8 @@ public class StatsGUI {
             int success = aStatsDAC.getNbSuccessJumps();
             int fails = aStatsDAC.getNbFailJumps();
             int sorts = aStatsDAC.getNbSortsUsed();
-            double freq_w = (double) wins/parties;
-            double freq_s = (double) success/jumps;
+            double freqW = (double) wins/parties;
+            double freqS = (double) success/jumps;
             DecimalFormat df = new DecimalFormat("##.##%");
 
             ItemStack dac = new ItemBuilder(Material.WATER_BUCKET).setName("§bDé à Coudre").
@@ -67,8 +71,8 @@ public class StatsGUI {
                             "§6Sauts réussis: §c" + success,
                             "§6Sauts ratés: §c" + fails, "",
                             "§6Sorts utilisés: §c" + sorts, "",
-                            "§6Pourcentage victoires: §c" + df.format(freq_w),
-                            "§6Pourcentage sauts réussis: §c" + df.format(freq_s))
+                            "§6Pourcentage victoires: §c" + df.format(freqW),
+                            "§6Pourcentage sauts réussis: §c" + df.format(freqS))
                     .removeFlags().toItemStack();
             inventory.setItem(20, dac);
         });

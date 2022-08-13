@@ -11,6 +11,10 @@ import org.bukkit.inventory.ItemStack;
 
 public class CosmeticsGUI {
 
+    private CosmeticsGUI() {
+        throw new IllegalStateException("This class should not be instantiated");
+    }
+
     public static final String COSMETICS_GUI_TITLE = "§dCosmétiques";
     public static final String PARTICLES_GUI_TITLE = "§dParticules";
     public static final String PETS_GUI_TITLE = "§dCompagnons";

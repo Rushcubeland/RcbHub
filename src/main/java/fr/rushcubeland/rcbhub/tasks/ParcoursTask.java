@@ -17,6 +17,10 @@ import org.bukkit.entity.Player;
 
 public class ParcoursTask {
 
+    private ParcoursTask() {
+        throw new IllegalStateException("This class should not be instantiated");
+    }
+
     public static void startParcoursTask(Player player, long ticks){
 
         if(!Parcours.getParcoursTasks().containsKey(player) && Parcours.getParcoursDataPlayers().containsKey(player)) {

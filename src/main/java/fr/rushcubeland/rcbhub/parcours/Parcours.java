@@ -16,12 +16,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Parcours {
 
-    private static final HashMap<Player, CheckPointUnit> parcoursDataPlayers = new HashMap<>();
-    private static final HashMap<Player, Integer> parcoursTasks = new HashMap<>();
-    private static final HashMap<Player, Long> parcoursTimersPlayers = new HashMap<>();
+    private Parcours() {
+        throw new IllegalStateException("This class should not be instantiated");
+    }
+
+    private static final Map<Player, CheckPointUnit> parcoursDataPlayers = new HashMap<>();
+    private static final Map<Player, Integer> parcoursTasks = new HashMap<>();
+    private static final Map<Player, Long> parcoursTimersPlayers = new HashMap<>();
 
     public static void checkpointPassed(Player player, Location blockLocation){
         if(CheckPointUnit.locationMatch(CheckPointUnit.START, blockLocation)){
@@ -108,15 +113,15 @@ public class Parcours {
         player.getInventory().setItem(4, slimeBall);
     }
 
-    public static HashMap<Player, CheckPointUnit> getParcoursDataPlayers() {
+    public static Map<Player, CheckPointUnit> getParcoursDataPlayers() {
         return parcoursDataPlayers;
     }
 
-    public static HashMap<Player, Integer> getParcoursTasks() {
+    public static Map<Player, Integer> getParcoursTasks() {
         return parcoursTasks;
     }
 
-    public static HashMap<Player, Long> getParcoursTimersPlayers() {
+    public static Map<Player, Long> getParcoursTimersPlayers() {
         return parcoursTimersPlayers;
     }
 }
