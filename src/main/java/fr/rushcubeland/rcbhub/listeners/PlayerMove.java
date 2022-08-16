@@ -1,8 +1,7 @@
 package fr.rushcubeland.rcbhub.listeners;
 
-import fr.rushcubeland.rcbcore.bukkit.map.MapUnit;
-import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
 import fr.rushcubeland.rcbhub.parcours.Parcours;
+import fr.rushcubeland.rcbhub.parcours.ParcoursLimitDetector;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -29,11 +28,10 @@ public class PlayerMove implements Listener {
             Location blockLocation = player.getLocation().getBlock().getRelative(BlockFace.DOWN).getLocation();
             Parcours.checkpointPassed(player, blockLocation);
         }
-        if(player.getLocation().getY() <= 192 && player.getLocation().getBlock().isLiquid() && Parcours.getParcoursDataPlayers().containsKey(player)) {
-            CheckPointUnit checkPointUnit = Parcours.getParcoursDataPlayers().get(player);
-            Location location = new Location(Bukkit.getWorld(MapUnit.LOBBY.getPath()), checkPointUnit.getX(), checkPointUnit.getY() + 1, checkPointUnit.getZ());
-            player.teleport(location);
-            player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1F, 1F);
+        ParcoursLimitDetector limitDetector = new ParcoursLimitDetector(player);
+        if(limitDetector.isPlayerExceedLimit()) {
+            Parcours.rollback(player);
+            return;
         }
 
         if(Flight.jumpers.contains(player)) {

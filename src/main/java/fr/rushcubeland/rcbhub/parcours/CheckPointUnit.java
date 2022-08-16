@@ -16,25 +16,28 @@ import org.bukkit.entity.Player;
 
 public enum CheckPointUnit {
 
-    START("le §6Départ", -89, 253, -19, new String[]{"§eParcours", "§6Départ"}),
-    FIRST_CHECKPOINT("le §61er Checkpoint", -51, 241, -54, new String[]{"§61er Checkpoint"}),
-    SND_CHECKPOINT("le §6Snd Checkpoint", -16, 231, -87, new String[]{"§6Snd Checkpoint"}),
-    THIRD_CHECKPOINT("le §63ème Checkpoint", 39, 194, -118, new String[]{"§63ème Checkpoint"}),
-    END("§6l'Arrivée", 53, 214, -110, new String[]{"§eParcours", "§6Arrivée"});
+    START("le §6Départ", -89, 253, -19, new String[]{"§eParcours", "§6Départ"}, 18F),
+    FIRST_CHECKPOINT("le §61er Checkpoint", -51, 241, -54, new String[]{"§61er Checkpoint"}, 18F),
+    SND_CHECKPOINT("le §6Snd Checkpoint", -16, 231, -87, new String[]{"§6Snd Checkpoint"}, 18F),
+    THIRD_CHECKPOINT("le §63ème Checkpoint", 39, 194, -118, new String[]{"§63ème Checkpoint"}, 18F),
+    END("§6l'Arrivée", 53, 214, -110, new String[]{"§eParcours", "§6Arrivée"}, 18F);
 
     private final String name;
     private final int x;
     private final int y;
     private final int z;
     private final String[] holograms;
+
+    private final float fallLimit;
     private Hologram hologram;
 
-    CheckPointUnit(String name, int x, int y, int z, String[] holograms) {
+    CheckPointUnit(String name, int x, int y, int z, String[] holograms, float fallLimit) {
         this.name = name;
         this.x = x;
         this.y = y;
         this.z = z;
         this.holograms = holograms;
+        this.fallLimit = fallLimit;
     }
 
     public String getName() {
@@ -55,6 +58,14 @@ public enum CheckPointUnit {
 
     public String[] getHolograms() {
         return holograms;
+    }
+
+    public float getFallLimit() {
+        return fallLimit;
+    }
+
+    public Hologram getHologram() {
+        return hologram;
     }
 
     public static boolean locationMatch(CheckPointUnit checkPointUnit, Location location){

@@ -74,11 +74,5 @@ public enum NPCUnit {
         }
     }
 
-    public static void deleteAll(){
-        for(NPC npc : NPC.getNPCs()){
-            npc.delete();
-        }
-    }
-
 }
 

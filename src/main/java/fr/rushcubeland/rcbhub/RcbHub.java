@@ -1,5 +1,6 @@
 package fr.rushcubeland.rcbhub;
 
+import fr.rushcubeland.rcbcore.bukkit.tools.NPC;
 import fr.rushcubeland.rcbhub.listeners.*;
 import fr.rushcubeland.rcbhub.npc.NPCUnit;
 import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
@@ -40,7 +41,7 @@ public class RcbHub extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        NPCUnit.deleteAll();
+        NPC.deleteAll();
         RcbHub.getInstance().getLogger().info("Plugin disabled");
         instance = null;
     }

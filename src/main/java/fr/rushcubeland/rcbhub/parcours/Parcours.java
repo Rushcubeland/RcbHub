@@ -3,6 +3,7 @@ package fr.rushcubeland.rcbhub.parcours;
 import fr.rushcubeland.commons.AStats;
 import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.rcbcore.bukkit.RcbAPI;
+import fr.rushcubeland.rcbcore.bukkit.map.MapUnit;
 import fr.rushcubeland.rcbcore.bukkit.tools.ItemBuilder;
 import fr.rushcubeland.rcbhub.listeners.PlayerJoin;
 import fr.rushcubeland.rcbhub.locations.LocationUnit;
@@ -81,27 +82,36 @@ public class Parcours {
                     Parcours.getParcoursTimersPlayers().remove(player);
                     player.sendMessage("§eVous avez passé " + CheckPointUnit.END.getName());
                     player.sendMessage("§6Vous avez terminé le parcours en §c" + timerFormat);
-                    Account account = RcbAPI.getInstance().getAccount(player);
-                    Bukkit.broadcastMessage(account.getRank().getPrefix() + player.getDisplayName() + " §ea terminé le parcours en §c" + timerFormat);
-                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1F, 1F);
-                    player.teleport(LocationUnit.LOBBY.getLocation());
-                    PlayerJoin.initFlyPlayer(player, account.getRank());
-                    PlayerJoin.giveJoinItems(player);
-                    RcbAPI.getInstance().getAccountStats(player, result -> {
-                        AStats aStats = (AStats) result;
-                        long currentTimer = aStats.getParcoursTimer();
-                        if(currentTimer == 0L){
-                            aStats.setParcoursTimer(timer);
-                        }
-                        else if(timer < currentTimer){
-                            player.sendMessage("§6Félicitations, Vous avez battu votre §crecord personnel !");
-                            aStats.setParcoursTimer(timer);
-                        }
-                        RcbAPI.getInstance().sendAStatsToRedis(aStats);
+                    RcbAPI.getInstance().getAccount(player, o -> {
+                        Account account = (Account) o;
+                        Bukkit.broadcastMessage(account.getRank().getPrefix() + player.getDisplayName() + " §ea terminé le parcours en §c" + timerFormat);
+                        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1F, 1F);
+                        player.teleport(LocationUnit.LOBBY.getLocation());
+                        PlayerJoin.initFlyPlayer(player, account.getRank());
+                        PlayerJoin.giveJoinItems(player);
+                        RcbAPI.getInstance().getAccountStats(player, result -> {
+                            AStats aStats = (AStats) result;
+                            long currentTimer = aStats.getParcoursTimer();
+                            if(currentTimer == 0L){
+                                aStats.setParcoursTimer(timer);
+                            }
+                            else if(timer < currentTimer){
+                                player.sendMessage("§6Félicitations, Vous avez battu votre §crecord personnel !");
+                                aStats.setParcoursTimer(timer);
+                            }
+                            RcbAPI.getInstance().sendAStatsToRedis(aStats);
+                        });
                     });
                 }
             }
+        }
+    }
 
+    public static void rollback(Player player){
+        if(Parcours.getParcoursDataPlayers().containsKey(player)){
+            CheckPointUnit checkPointUnit = Parcours.getParcoursDataPlayers().get(player);
+            Location location = new Location(Bukkit.getWorld(MapUnit.LOBBY.getPath()), checkPointUnit.getX(), checkPointUnit.getY()+1, checkPointUnit.getZ());
+            player.teleport(location);
         }
     }
 

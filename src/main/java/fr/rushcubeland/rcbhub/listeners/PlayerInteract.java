@@ -3,17 +3,17 @@ package fr.rushcubeland.rcbhub.listeners;
 import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.rcbcore.bukkit.BukkitSend;
 import fr.rushcubeland.rcbcore.bukkit.RcbAPI;
-import fr.rushcubeland.rcbcore.bukkit.map.MapUnit;
 import fr.rushcubeland.rcbcore.bukkit.tools.ItemBuilder;
 import fr.rushcubeland.rcbhub.RcbHub;
 import fr.rushcubeland.rcbhub.gui.MainGUI;
 import fr.rushcubeland.rcbhub.gui.StatsGUI;
 import fr.rushcubeland.rcbhub.locations.LocationUnit;
-import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
 import fr.rushcubeland.rcbhub.parcours.Parcours;
 import fr.rushcubeland.rcbhub.tasks.ParcoursTask;
-import org.bukkit.*;
-import org.bukkit.block.Block;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -52,12 +52,8 @@ public class PlayerInteract implements Listener {
                     }
                 }
                 if(current.getType().equals(Material.SLIME_BALL)){
-                    if(Parcours.getParcoursDataPlayers().containsKey(player)){
-                        CheckPointUnit checkPointUnit = Parcours.getParcoursDataPlayers().get(player);
-                        Location location = new Location(Bukkit.getWorld(MapUnit.LOBBY.getPath()), checkPointUnit.getX(), checkPointUnit.getY()+1, checkPointUnit.getZ());
-                        player.teleport(location);
-                        player.sendMessage("§eVous avez rejoin le dernier §cCheckpoint !");
-                    }
+                    Parcours.rollback(player);
+                    player.sendMessage("§eVous avez rejoin le dernier §cCheckpoint !");
                 }
                 if(current.getType().equals(Material.COMPASS)){
                     MainGUI.openInv(player);
