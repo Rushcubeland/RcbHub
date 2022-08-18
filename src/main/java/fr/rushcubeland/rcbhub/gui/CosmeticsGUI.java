@@ -4,6 +4,7 @@ import fr.rushcubeland.commons.cosmetics.ParticlesUnit;
 import fr.rushcubeland.commons.cosmetics.PetsUnit;
 import fr.rushcubeland.rcbcore.bukkit.tools.ItemBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -15,9 +16,9 @@ public class CosmeticsGUI {
         throw new IllegalStateException("This class should not be instantiated");
     }
 
-    public static final String COSMETICS_GUI_TITLE = "§dCosmétiques";
-    public static final String PARTICLES_GUI_TITLE = "§dParticules";
-    public static final String PETS_GUI_TITLE = "§dCompagnons";
+    public static final String COSMETICS_GUI_TITLE = ChatColor.LIGHT_PURPLE + "Cosmétiques";
+    public static final String PARTICLES_GUI_TITLE = ChatColor.LIGHT_PURPLE + "Particules";
+    public static final String PETS_GUI_TITLE = ChatColor.LIGHT_PURPLE + "Compagnons";
 
 
     public static void openCosmeticsGUI(Player player){
@@ -26,12 +27,12 @@ public class CosmeticsGUI {
 
         initGlass(inventory, Material.BLACK_STAINED_GLASS_PANE);
 
-        ItemStack particles = new ItemBuilder(Material.BLAZE_POWDER).setName("§eParticules").removeFlags().toItemStack();
+        ItemStack particles = new ItemBuilder(Material.BLAZE_POWDER).setName(ChatColor.YELLOW + "Particules").removeFlags().toItemStack();
         inventory.setItem(19, particles);
 
-        ItemStack pets = new ItemBuilder(Material.CARROT_ON_A_STICK).setName("§eCompagnon").removeFlags().toItemStack();
+        ItemStack pets = new ItemBuilder(Material.CARROT_ON_A_STICK).setName(ChatColor.YELLOW + "Compagnon").removeFlags().toItemStack();
         inventory.setItem(20, pets);
-        ItemStack close = new ItemBuilder(Material.ACACIA_DOOR).setName("§cFermer").toItemStack();
+        ItemStack close = new ItemBuilder(Material.ACACIA_DOOR).setName(ChatColor.RED + "Fermer").toItemStack();
         inventory.setItem(49, close);
 
         player.openInventory(inventory);

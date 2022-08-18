@@ -3,6 +3,7 @@ package fr.rushcubeland.rcbhub.parcours;
 import fr.rushcubeland.rcbcore.bukkit.map.MapUnit;
 import fr.rushcubeland.rcbcore.bukkit.tools.Hologram;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -16,11 +17,11 @@ import org.bukkit.entity.Player;
 
 public enum CheckPointUnit {
 
-    START("le §6Départ", -89, 253, -19, new String[]{"§eParcours", "§6Départ"}, 18F),
-    FIRST_CHECKPOINT("le §61er Checkpoint", -51, 241, -54, new String[]{"§61er Checkpoint"}, 18F),
-    SND_CHECKPOINT("le §6Snd Checkpoint", -16, 231, -87, new String[]{"§6Snd Checkpoint"}, 18F),
-    THIRD_CHECKPOINT("le §63ème Checkpoint", 39, 194, -118, new String[]{"§63ème Checkpoint"}, 18F),
-    END("§6l'Arrivée", 53, 214, -110, new String[]{"§eParcours", "§6Arrivée"}, 18F);
+    START("le " + ChatColor.GOLD + "Départ", -89, 253, -19, new String[]{ChatColor.YELLOW + "Parcours", ChatColor.GOLD + "Départ"}, 18F),
+    FIRST_CHECKPOINT("le " + ChatColor.GOLD + "1er Checkpoint", -51, 241, -54, new String[]{ChatColor.GOLD + "1er Checkpoint"}, 18F),
+    SND_CHECKPOINT("le " + ChatColor.GOLD + "Snd Checkpoint", -16, 231, -87, new String[]{ChatColor.GOLD + "Snd Checkpoint"}, 18F),
+    THIRD_CHECKPOINT("le " + ChatColor.GOLD + "3ème Checkpoint", 39, 194, -118, new String[]{ChatColor.GOLD + "3ème Checkpoint"}, 18F),
+    END(ChatColor.GOLD + "" + "l'Arrivée", 53, 214, -110, new String[]{ChatColor.YELLOW + "Parcours", ChatColor.GOLD + "Arrivée"}, 18F);
 
     private final String name;
     private final int x;

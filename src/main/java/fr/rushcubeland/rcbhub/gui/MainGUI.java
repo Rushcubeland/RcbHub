@@ -1,9 +1,11 @@
 package fr.rushcubeland.rcbhub.gui;
 
 import fr.rushcubeland.commons.Account;
+import fr.rushcubeland.commons.rank.RankUnit;
 import fr.rushcubeland.rcbcore.bukkit.RcbAPI;
 import fr.rushcubeland.rcbcore.bukkit.tools.ItemBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -33,31 +35,31 @@ public class MainGUI {
 
     public static void openInv(Player player){
 
-        Inventory inventory = Bukkit.createInventory(null, 54, "§6Menu Principal");
+        Inventory inventory = Bukkit.createInventory(null, 54, ChatColor.GOLD + "Menu Principal");
         initGlass(inventory, Material.CYAN_STAINED_GLASS_PANE);
 
-        ItemStack dbr = new ItemBuilder(Material.BEACON).setName("§6DeterrentBorder §f[§cRANKED§f]").removeFlags().toItemStack();
+        ItemStack dbr = new ItemBuilder(Material.BEACON).setName(ChatColor.GOLD + "DeterrentBorder " + ChatColor.WHITE + "[" + ChatColor.RED + "RANKED" + ChatColor.WHITE + "]").removeFlags().toItemStack();
         dbr.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
         ItemMeta dbrm = dbr.getItemMeta();
         dbr.setItemMeta(dbrm);
         inventory.setItem(23, dbr);
 
-        ItemStack db = new ItemBuilder(Material.BEACON).setName("§6DeterrentBorder §f[CASUAL]").toItemStack();
+        ItemStack db = new ItemBuilder(Material.BEACON).setName(ChatColor.GOLD + "DeterrentBorder " + ChatColor.WHITE + "[CASUAL]").toItemStack();
         inventory.setItem(21, db);
 
-        ItemStack dac = new ItemBuilder(Material.WATER_BUCKET).setName("§bDé à coudre").toItemStack();
+        ItemStack dac = new ItemBuilder(Material.WATER_BUCKET).setName(ChatColor.AQUA + "Dé à coudre").toItemStack();
         inventory.setItem(31, dac);
 
         Account account = RcbAPI.getInstance().getAccount(player);
 
         final ItemStack headp;
 
-        if(account.getRank().getPrefix().equals("")){
-            headp = new ItemBuilder(Material.PLAYER_HEAD).setName("§6Informations:").setLore("§c ", "§fGrade: §7[Joueur]" , "§fCoins: §c" + account.getCoins() + " §e⛁", "§fPalier Pass de combat: §a14", "§f   ", "§aPlus d'avantages ?", "§ehttps://store.rushcubeland.fr").toItemStack();
+        if(account.getRank().getPrefix().equals(RankUnit.JOUEUR.getPrefix())){
+            headp = new ItemBuilder(Material.PLAYER_HEAD).setName(ChatColor.GOLD + "Informations:").setLore(" ", ChatColor.WHITE + "Grade: " + ChatColor.GRAY + "[Joueur]" , ChatColor.WHITE + "Coins: " + ChatColor.RED + account.getCoins() + " " + ChatColor.YELLOW + "⛁", ChatColor.WHITE + "Palier Pass de combat: " + ChatColor.GREEN + "14", "  ", ChatColor.GREEN + "Plus d'avantages ?", ChatColor.YELLOW + "https://store.rushcubeland.fr").toItemStack();
         }
         else
         {
-            headp = new ItemBuilder(Material.PLAYER_HEAD).setName("§6Informations:").setLore("§c ", "§fGrade: " + account.getRank().getPrefix(), "§fCoins: §c" + account.getCoins() + " §e⛁", "§fPalier Pass de combat: §a14", "§f   ", "§aPlus d'avantages ?", "§ehttps://store.rushcubeland.fr").toItemStack();
+            headp = new ItemBuilder(Material.PLAYER_HEAD).setName(ChatColor.GOLD + "Informations:").setLore(" ", ChatColor.WHITE + "Grade: " + account.getRank().getPrefix() , ChatColor.WHITE + "Coins: " + ChatColor.RED + account.getCoins() + " " + ChatColor.YELLOW + "⛁", ChatColor.WHITE + "Palier Pass de combat: " + ChatColor.GREEN + "14", "  ", ChatColor.GREEN + "Plus d'avantages ?", ChatColor.YELLOW + "https://store.rushcubeland.fr").toItemStack();
         }
 
         SkullMeta headpm = (SkullMeta) headp.getItemMeta();
@@ -67,13 +69,13 @@ public class MainGUI {
         headp.setItemMeta(headpm);
         inventory.setItem(27, headp);
 
-        ItemStack jump = new ItemBuilder(Material.GOLDEN_BOOTS).setName("§bParcours").setLore("§b ","§7Saute de bloc en bloc pour terminer le parcours", "§4 ", "§e➤ Se teleporter").removeFlags().toItemStack();
+        ItemStack jump = new ItemBuilder(Material.GOLDEN_BOOTS).setName(ChatColor.AQUA + "Parcours").setLore(" ", ChatColor.GRAY + "Saute de bloc en bloc pour terminer le parcours", " ", ChatColor.YELLOW + "➤ Se teleporter").removeFlags().toItemStack();
         inventory.setItem(35, jump);
 
-        ItemStack info = new ItemBuilder(Material.COMPASS).setName("§6Hub").setLore(" ", "§7Le hub est le lieu principal du serveur,", "§7il vous permet de vous amuser avec vos amis,", "§7d'explorer ses divers endroits ou de vous poser", "§7à coté de l'eau", " ", "§f➤ Il y a §e" + Bukkit.getOnlinePlayers().size() + " §fjoueurs sur le hub").toItemStack();
+        ItemStack info = new ItemBuilder(Material.COMPASS).setName(ChatColor.GOLD + "Hub").setLore(" ", ChatColor.GRAY + "Le hub est le lieu principal du serveur,", ChatColor.GRAY + "il vous permet de vous amuser avec vos amis,", ChatColor.GRAY + "d'explorer ses divers endroits ou de vous poser", ChatColor.GRAY + "à coté de l'eau", " ", ChatColor.WHITE + "➤ Il y a " + ChatColor.YELLOW + Bukkit.getOnlinePlayers().size() + " " + ChatColor.WHITE + "joueurs sur le hub").toItemStack();
         inventory.setItem(4, info);
 
-        ItemStack close = new ItemBuilder(Material.ACACIA_DOOR).setName("§cFermer").toItemStack();
+        ItemStack close = new ItemBuilder(Material.ACACIA_DOOR).setName(ChatColor.RED + "Fermer").toItemStack();
         inventory.setItem(49, close);
 
 

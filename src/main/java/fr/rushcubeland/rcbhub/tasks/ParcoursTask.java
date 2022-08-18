@@ -5,6 +5,7 @@ import fr.rushcubeland.rcbhub.RcbHub;
 import fr.rushcubeland.rcbhub.parcours.Parcours;
 import org.apache.commons.lang.time.DurationFormatUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 /**
@@ -34,7 +35,7 @@ public class ParcoursTask {
                     long current = System.currentTimeMillis();
                     long difference = current - startTime;
                     String format = DurationFormatUtils.formatDurationHMS(difference);
-                    TitleManager.sendActionBar(player, "§eParcours: §c" + format);
+                    TitleManager.sendActionBar(player, ChatColor.YELLOW + "Parcours: " + ChatColor.RED + format);
 
                     if(Parcours.getParcoursTimersPlayers().containsKey(player)) {
                         Parcours.getParcoursTimersPlayers().replace(player, difference);

@@ -7,6 +7,7 @@ import fr.rushcubeland.commons.rank.RankUnit;
 import fr.rushcubeland.rcbcore.bukkit.RcbAPI;
 import fr.rushcubeland.rcbcore.bukkit.tools.ItemBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -27,19 +28,19 @@ public class StatsGUI {
 
     private static final Map<Player, Inventory> GUI = new HashMap<>();
 
-    public static void OpenInv(Player player){
+    public static void openInv(Player player){
 
-        Inventory inventory = Bukkit.createInventory(null, 54, "§cStatistiques");
+        Inventory inventory = Bukkit.createInventory(null, 54, ChatColor.RED + "Statistiques");
         initGlass(inventory, Material.GREEN_STAINED_GLASS_PANE);
         RcbAPI.getInstance().getAccount(player, result -> {
             final ItemStack headp;
             Account account = (Account) result;
             if(account.getRank().getPrefix().equals(RankUnit.JOUEUR.getPrefix())){
-                headp = new ItemBuilder(Material.PLAYER_HEAD).setName("§6Informations:").setLore("§c ", "§fGrade: §7[Joueur]" , "§fCoins: §c" + account.getCoins() + " §e⛁", "§fPalier Pass de combat: §a14", "§f   ", "§aPlus d'avantages ?", "§ehttps://store.rushcubeland.fr").toItemStack();
+                headp = new ItemBuilder(Material.PLAYER_HEAD).setName(ChatColor.GOLD + "Informations:").setLore(" ", ChatColor.WHITE + "Grade: " + ChatColor.GRAY + "[Joueur]" , ChatColor.WHITE + "Coins: " + ChatColor.RED + account.getCoins() + " " + ChatColor.YELLOW + "⛁", ChatColor.WHITE + "Palier Pass de combat: " + ChatColor.GREEN + "14", "  ", ChatColor.GREEN + "Plus d'avantages ?", ChatColor.YELLOW + "https://store.rushcubeland.fr").toItemStack();
             }
             else
             {
-                headp = new ItemBuilder(Material.PLAYER_HEAD).setName("§6Informations:").setLore("§c ", "§fGrade: " + account.getRank().getPrefix(), "§fCoins: §c" + account.getCoins() + " §e⛁", "§fPalier Pass de combat: §a14", "§f   ", "§aPlus d'avantages ?", "§ehttps://store.rushcubeland.fr").toItemStack();
+                headp = new ItemBuilder(Material.PLAYER_HEAD).setName(ChatColor.GOLD + "Informations:").setLore(" ", ChatColor.WHITE + "Grade: " + account.getRank().getPrefix() , ChatColor.WHITE + "Coins: " + ChatColor.RED + account.getCoins() + " " + ChatColor.YELLOW + "⛁", ChatColor.WHITE + "Palier Pass de combat: " + ChatColor.GREEN + "14", "  ", ChatColor.GREEN + "Plus d'avantages ?", ChatColor.YELLOW + "https://store.rushcubeland.fr").toItemStack();
             }
             SkullMeta headpm = (SkullMeta) headp.getItemMeta();
             if (headpm != null) {
@@ -63,16 +64,16 @@ public class StatsGUI {
             double freqS = (double) success/jumps;
             DecimalFormat df = new DecimalFormat("##.##%");
 
-            ItemStack dac = new ItemBuilder(Material.WATER_BUCKET).setName("§bDé à Coudre").
-                    setLore("", "§6Parties: §c" + parties,
-                            "§6Victoires: §c" + wins,
-                            "§6Défaites: §c" + loses, "",
-                            "§6Sauts: §c" + jumps,
-                            "§6Sauts réussis: §c" + success,
-                            "§6Sauts ratés: §c" + fails, "",
-                            "§6Sorts utilisés: §c" + sorts, "",
-                            "§6Pourcentage victoires: §c" + df.format(freqW),
-                            "§6Pourcentage sauts réussis: §c" + df.format(freqS))
+            ItemStack dac = new ItemBuilder(Material.WATER_BUCKET).setName(ChatColor.AQUA + "Dé à Coudre").
+                    setLore("", ChatColor.GOLD + "Parties: " + ChatColor.RED + parties,
+                            ChatColor.GOLD + "Victoires: " + ChatColor.RED + wins,
+                            ChatColor.GOLD + "Défaites: " + ChatColor.RED + loses, "",
+                            ChatColor.GOLD + "Sauts: " + ChatColor.RED + jumps,
+                            ChatColor.GOLD + "Sauts réussis: " + ChatColor.RED + success,
+                            ChatColor.GOLD + "Sauts ratés: " + ChatColor.RED + fails, "",
+                            ChatColor.GOLD + "Sorts utilisés: " + ChatColor.RED + sorts, "",
+                            ChatColor.GOLD + "Pourcentage victoires: " + ChatColor.RED + df.format(freqW),
+                            ChatColor.GOLD + "Pourcentage sauts réussis: " + ChatColor.RED + df.format(freqS))
                     .removeFlags().toItemStack();
             inventory.setItem(20, dac);
         });
@@ -82,12 +83,12 @@ public class StatsGUI {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
             dateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Paris"));
 
-            ItemStack parcourStats = new ItemBuilder(Material.OAK_SIGN).removeFlags().setName("§eParcours").setLore(
-                    " ", "§6Meilleur temps: §c" + aStats.getParcoursTimerFormat(), "§6Première connexion: §7" + dateFormat.format(aStats.getFirstConnection()), " ").toItemStack();
+            ItemStack parcourStats = new ItemBuilder(Material.OAK_SIGN).removeFlags().setName(ChatColor.YELLOW + "Parcours").setLore(
+                    " ", ChatColor.GOLD + "Meilleur temps: " + ChatColor.RED + aStats.getParcoursTimerFormat(), ChatColor.GOLD + "Première connexion: " + ChatColor.GRAY + dateFormat.format(aStats.getFirstConnection()), " ").toItemStack();
             inventory.setItem(25, parcourStats);
         });
 
-        ItemStack close = new ItemBuilder(Material.ACACIA_DOOR).setName("§cFermer").toItemStack();
+        ItemStack close = new ItemBuilder(Material.ACACIA_DOOR).setName(ChatColor.RED + "Fermer").toItemStack();
         inventory.setItem(49, close);
 
         GUI.put(player, inventory);

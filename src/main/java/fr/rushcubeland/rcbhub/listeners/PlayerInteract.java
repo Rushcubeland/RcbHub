@@ -10,10 +10,7 @@ import fr.rushcubeland.rcbhub.gui.StatsGUI;
 import fr.rushcubeland.rcbhub.locations.LocationUnit;
 import fr.rushcubeland.rcbhub.parcours.Parcours;
 import fr.rushcubeland.rcbhub.tasks.ParcoursTask;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -42,7 +39,7 @@ public class PlayerInteract implements Listener {
                 if(current.getType().equals(Material.RED_BED)){
                     if(Parcours.getParcoursDataPlayers().containsKey(player)){
                         player.teleport(LocationUnit.LOBBY.getLocation());
-                        player.sendMessage("§cVous avez quitter le parcours !");
+                        player.sendMessage(ChatColor.RED + "Vous avez quitter le parcours !");
                         ParcoursTask.stopParcoursTask(player);
                         Parcours.getParcoursTimersPlayers().remove(player);
                         Parcours.getParcoursDataPlayers().remove(player);
@@ -53,13 +50,13 @@ public class PlayerInteract implements Listener {
                 }
                 if(current.getType().equals(Material.SLIME_BALL)){
                     Parcours.rollback(player);
-                    player.sendMessage("§eVous avez rejoin le dernier §cCheckpoint !");
+                    player.sendMessage(ChatColor.YELLOW + "Vous avez rejoin le dernier " + ChatColor.RED + "Checkpoint !");
                 }
                 if(current.getType().equals(Material.COMPASS)){
                     MainGUI.openInv(player);
                 }
                 if(current.getType().equals(Material.PLAYER_HEAD)){
-                    StatsGUI.OpenInv(player);
+                    StatsGUI.openInv(player);
                 }
                 if(current.getType().equals(Material.COMPARATOR)){
                     BukkitSend.cmdToProxy(player, "opt");
@@ -74,34 +71,33 @@ public class PlayerInteract implements Listener {
                     if(dataTartareShadow.containsKey(player)){
                         if(dataTartareShadow.get(player).equals(true)){
                             dataTartareShadow.put(player, false);
-                            ItemStack magicClock = new ItemBuilder(Material.CLOCK).setName("§7Ombre de Tartare: §cDésactivé").setLore("§f ", "").toItemStack();
+                            ItemStack magicClock = new ItemBuilder(Material.CLOCK).setName(ChatColor.GRAY + "Ombre de Tartare: " + ChatColor.RED + "Désactivé").setLore(" ", "").toItemStack();
                             player.getInventory().setItem(4, magicClock);
                             for(Player pls : Bukkit.getOnlinePlayers()){
                                 player.showPlayer(RcbHub.getInstance(), pls);
                             }
                         }
                         else {
-                            dataTartareShadow.put(player, true);
-                            ItemStack magicClock = new ItemBuilder(Material.CLOCK).setName("§7Ombre de Tartare: §aActivé").setLore("§f ", "").toItemStack();
-                            player.getInventory().setItem(4, magicClock);
-                            for(Player pls : Bukkit.getOnlinePlayers()){
-                                player.hidePlayer(RcbHub.getInstance(), pls);
-                            }
+                            activateTartare(player);
                         }
                     }
                     else
                     {
-                        dataTartareShadow.put(player, true);
-                        ItemStack magicClock = new ItemBuilder(Material.CLOCK).setName("§7Ombre de Tartare: §aActivé").setLore("§f ", "").toItemStack();
-                        player.getInventory().setItem(4, magicClock);
-                        for(Player pls : Bukkit.getOnlinePlayers()){
-                            player.hidePlayer(RcbHub.getInstance(), pls);
-                        }
+                        activateTartare(player);
                     }
                     player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 30, 1));
                     player.playSound(player.getLocation(), Sound.ENTITY_PHANTOM_AMBIENT, SoundCategory.AMBIENT, 1F, 1F);
                 }
             }
+        }
+    }
+
+    private void activateTartare(Player player){
+        dataTartareShadow.put(player, true);
+        ItemStack magicClock = new ItemBuilder(Material.CLOCK).setName(ChatColor.GRAY + "Ombre de Tartare: " + ChatColor.GREEN + "Activé").setLore(" ", "").toItemStack();
+        player.getInventory().setItem(4, magicClock);
+        for(Player pls : Bukkit.getOnlinePlayers()){
+            player.hidePlayer(RcbHub.getInstance(), pls);
         }
     }
 }

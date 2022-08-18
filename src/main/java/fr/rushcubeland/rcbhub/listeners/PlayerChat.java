@@ -37,7 +37,7 @@ public class PlayerChat implements Listener {
         String message = event.getMessage();
         if(MuteData.isInMuteData(player.getUniqueId().toString()) && !message.startsWith("/")){
             event.setCancelled(true);
-            player.sendMessage("§cVous avez été mute !");
+            player.sendMessage(ChatColor.RED + "Vous avez été mute !");
             return;
         }
         if(ReportMsgCommand.msgs.containsKey(player.getName())){

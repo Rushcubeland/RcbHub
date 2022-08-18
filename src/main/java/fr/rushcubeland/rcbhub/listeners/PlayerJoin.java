@@ -8,6 +8,7 @@ import fr.rushcubeland.rcbcore.bukkit.tools.NPC;
 import fr.rushcubeland.rcbcore.bukkit.tools.ScoreboardSign;
 import fr.rushcubeland.rcbhub.locations.LocationUnit;
 import fr.rushcubeland.rcbhub.parcours.CheckPointUnit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -33,7 +34,7 @@ public class PlayerJoin implements Listener {
         player.setHealth(20D);
         player.setFoodLevel(20);
 
-        player.sendTitle("§6Rushcubeland", "§cUnivers compétitif et stratégique !", 10, 70, 20);
+        player.sendTitle(ChatColor.GOLD + "Rushcubeland", ChatColor.RED + "Univers compétitif et stratégique !", 10, 70, 20);
 
         CheckPointUnit.showHolograms(player);
 
@@ -45,7 +46,7 @@ public class PlayerJoin implements Listener {
         Account account = RcbAPI.getInstance().getAccount(player);
         RankUnit rank = account.getRank();
         if(rank.getPower() <= 45){
-            event.setJoinMessage(rank.getPrefix() + player.getDisplayName() + " §ba rejoin le Lobby !");
+            event.setJoinMessage(rank.getPrefix() + player.getDisplayName() + ChatColor.AQUA + " a rejoin le Lobby !");
         }
         else {
             event.setJoinMessage(null);
@@ -71,18 +72,18 @@ public class PlayerJoin implements Listener {
     }
 
     private void initScoreboardPlayer(Player player){
-        ScoreboardSign scoreboard = new ScoreboardSign(player, "§6§l§nRushcubeland");
+        ScoreboardSign scoreboard = new ScoreboardSign(player, ChatColor.GOLD + "" + ChatColor.BOLD + "" + ChatColor.UNDERLINE +"Rushcubeland");
         scoreboard.create();
         scoreboard.setLine(0, "§f ");
-        scoreboard.setLine(1, "§fCompte: ");
+        scoreboard.setLine(1, ChatColor.WHITE + "Compte: ");
         scoreboard.setLine(2, "§c ");
-        scoreboard.setLine(3, "§fCoins: §c");
+        scoreboard.setLine(3, ChatColor.WHITE + "Coins: ");
         scoreboard.setLine(4, "§7 ");
-        scoreboard.setLine(5, "§fPass de combat: §5Palier 14");
+        scoreboard.setLine(5, ChatColor.WHITE + "Pass de combat: " + ChatColor.DARK_PURPLE + "Palier 14");
         scoreboard.setLine(6, "§b ");
-        scoreboard.setLine(7, "§fJoueurs en ligne: ");
+        scoreboard.setLine(7, ChatColor.WHITE + "Joueurs en ligne: ");
         scoreboard.setLine(8, "§4 ");
-        scoreboard.setLine(9, "§eplay.rushcubeland.fr");
+        scoreboard.setLine(9, ChatColor.YELLOW + "play.rushcubeland.fr");
         RcbAPI.getInstance().boards.put(player, scoreboard);
 
     }

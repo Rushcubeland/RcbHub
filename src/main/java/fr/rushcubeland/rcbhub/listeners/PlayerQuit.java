@@ -4,6 +4,7 @@ import fr.rushcubeland.commons.Account;
 import fr.rushcubeland.commons.rank.RankUnit;
 import fr.rushcubeland.rcbcore.bukkit.RcbAPI;
 import fr.rushcubeland.rcbhub.parcours.Parcours;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -38,7 +39,7 @@ public class PlayerQuit implements Listener {
         Account account = RcbAPI.getInstance().getAccount(player);
         RankUnit rank = account.getRank();
         if(rank.getPower() <= 45){
-            event.setQuitMessage(rank.getPrefix() + player.getDisplayName() + " §ca quitté le Lobby !");
+            event.setQuitMessage(rank.getPrefix() + player.getDisplayName() + ChatColor.RED + " a quitté le Lobby !");
         }
         else
         {
