@@ -43,7 +43,6 @@ public class RcbHub extends JavaPlugin {
     public void onDisable() {
         NPC.deleteAll();
         RcbHub.getInstance().getLogger().info("Plugin disabled");
-        instance = null;
     }
 
     private void registerListeners(){
@@ -68,6 +67,7 @@ public class RcbHub extends JavaPlugin {
     }
 
     private void registerCommands(){
+        throw new UnsupportedOperationException("Not supported");
     }
 
     private void reloadScoreboardTask(){

@@ -60,36 +60,34 @@ public class Parcours {
                 passedMessage(player, CheckPointUnit.THIRD_CHECKPOINT);
             }
         }
-        else if(CheckPointUnit.locationMatch(CheckPointUnit.END, blockLocation)){
-            if(Parcours.getParcoursDataPlayers().containsKey(player) && Parcours.getParcoursDataPlayers().get(player).equals(CheckPointUnit.THIRD_CHECKPOINT)){
-                Parcours.getParcoursDataPlayers().remove(player);
-                ParcoursTask.stopParcoursTask(player);
-                long timer = getParcoursTimersPlayers().get(player);
-                String timerFormat = DurationFormatUtils.formatDurationHMS(timer);
-                Parcours.getParcoursTimersPlayers().remove(player);
-                player.sendMessage(ChatColor.YELLOW + "Vous avez passé " + CheckPointUnit.END.getName());
-                player.sendMessage(ChatColor.GOLD + "Vous avez terminé le parcours en " + ChatColor.RED + timerFormat);
-                RcbAPI.getInstance().getAccount(player, o -> {
-                    Account account = (Account) o;
-                    Bukkit.broadcastMessage(account.getRank().getPrefix() + player.getDisplayName() + " " + ChatColor.YELLOW + "a terminé le parcours en " + ChatColor.RED + timerFormat);
-                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1F, 1F);
-                    player.teleport(LocationUnit.LOBBY.getLocation());
-                    PlayerJoin.initFlyPlayer(player, account.getRank());
-                    PlayerJoin.giveJoinItems(player);
-                    RcbAPI.getInstance().getAccountStats(player, result -> {
-                        AStats aStats = (AStats) result;
-                        long currentTimer = aStats.getParcoursTimer();
-                        if(currentTimer == 0L){
-                            aStats.setParcoursTimer(timer);
-                        }
-                        else if(timer < currentTimer){
-                            player.sendMessage(ChatColor.GOLD + "Félicitations, Vous avez battu votre " + ChatColor.RED + "record personnel !");
-                            aStats.setParcoursTimer(timer);
-                        }
-                        RcbAPI.getInstance().sendAStatsToRedis(aStats);
-                    });
+        else if(CheckPointUnit.locationMatch(CheckPointUnit.END, blockLocation) && Parcours.getParcoursDataPlayers().containsKey(player) && Parcours.getParcoursDataPlayers().get(player).equals(CheckPointUnit.THIRD_CHECKPOINT)){
+            Parcours.getParcoursDataPlayers().remove(player);
+            ParcoursTask.stopParcoursTask(player);
+            long timer = getParcoursTimersPlayers().get(player);
+            String timerFormat = DurationFormatUtils.formatDurationHMS(timer);
+            Parcours.getParcoursTimersPlayers().remove(player);
+            player.sendMessage(ChatColor.YELLOW + "Vous avez passé " + CheckPointUnit.END.getName());
+            player.sendMessage(ChatColor.GOLD + "Vous avez terminé le parcours en " + ChatColor.RED + timerFormat);
+            RcbAPI.getInstance().getAccount(player, o -> {
+                Account account = (Account) o;
+                Bukkit.broadcastMessage(account.getRank().getPrefix() + player.getDisplayName() + " " + ChatColor.YELLOW + "a terminé le parcours en " + ChatColor.RED + timerFormat);
+                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1F, 1F);
+                player.teleport(LocationUnit.LOBBY.getLocation());
+                PlayerJoin.initFlyPlayer(player, account.getRank());
+                PlayerJoin.giveJoinItems(player);
+                RcbAPI.getInstance().getAccountStats(player, result -> {
+                    AStats aStats = (AStats) result;
+                    long currentTimer = aStats.getParcoursTimer();
+                    if(currentTimer == 0L){
+                        aStats.setParcoursTimer(timer);
+                    }
+                    else if(timer < currentTimer){
+                        player.sendMessage(ChatColor.GOLD + "Félicitations, Vous avez battu votre " + ChatColor.RED + "record personnel !");
+                        aStats.setParcoursTimer(timer);
+                    }
+                    RcbAPI.getInstance().sendAStatsToRedis(aStats);
                 });
-            }
+            });
         }
     }
 
