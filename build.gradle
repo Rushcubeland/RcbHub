@@ -1,21 +1,19 @@
 plugins {
     id 'java'
+    id "org.sonarqube" version "3.4.0.2513"
 }
 
 group 'fr.rushcubeland.rcbhub'
 version '1.0-SNAPSHOT'
 
 repositories {
-    maven {
-        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
-    }
     mavenCentral()
     mavenLocal()
 }
 
 dependencies {
-    compileOnly 'org.spigotmc:spigot:1.15.2-R0.1-SNAPSHOT'
     compileOnly fileTree(dir: 'libs', include: ['RcbCore*.jar'])
+    compileOnly 'org.spigotmc:spigot:1.15.2-R0.1-SNAPSHOT'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
@@ -50,4 +48,12 @@ compileJava.options.encoding = 'UTF-8'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "Rushcubeland_RcbHub"
+        property "sonar.organization", "rushcubeland"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
 }

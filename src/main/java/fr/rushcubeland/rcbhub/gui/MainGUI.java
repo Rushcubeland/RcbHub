@@ -27,11 +27,11 @@ import java.util.Map;
 
 public class MainGUI {
 
+    private static final Map<Player, Inventory> GUI = new HashMap<>();
+
     private MainGUI() {
         throw new IllegalStateException("This class should not be instantiated");
     }
-
-    private static final Map<Player, Inventory> GUI = new HashMap<>();
 
     public static void openInv(Player player){
 
@@ -54,7 +54,7 @@ public class MainGUI {
 
         final ItemStack headp;
 
-        if(account.getRank().getPrefix().equals(RankUnit.JOUEUR.getPrefix())){
+        if(account.getRank().equals(RankUnit.JOUEUR)){
             headp = new ItemBuilder(Material.PLAYER_HEAD).setName(ChatColor.GOLD + "Informations:").setLore(" ", ChatColor.WHITE + "Grade: " + ChatColor.GRAY + "[Joueur]" , ChatColor.WHITE + "Coins: " + ChatColor.RED + account.getCoins() + " " + ChatColor.YELLOW + "⛁", ChatColor.WHITE + "Palier Pass de combat: " + ChatColor.GREEN + "14", "  ", ChatColor.GREEN + "Plus d'avantages ?", ChatColor.YELLOW + "https://store.rushcubeland.fr").toItemStack();
         }
         else

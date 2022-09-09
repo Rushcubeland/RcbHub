@@ -67,7 +67,7 @@ public class RcbHub extends JavaPlugin {
     }
 
     private void registerCommands(){
-        throw new UnsupportedOperationException("Not supported");
+        throw new UnsupportedOperationException("Not supported yet");
     }
 
     private void reloadScoreboardTask(){

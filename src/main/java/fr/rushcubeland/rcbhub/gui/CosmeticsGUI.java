@@ -12,14 +12,13 @@ import org.bukkit.inventory.ItemStack;
 
 public class CosmeticsGUI {
 
-    private CosmeticsGUI() {
-        throw new IllegalStateException("This class should not be instantiated");
-    }
-
     public static final String COSMETICS_GUI_TITLE = ChatColor.LIGHT_PURPLE + "Cosmétiques";
     public static final String PARTICLES_GUI_TITLE = ChatColor.LIGHT_PURPLE + "Particules";
     public static final String PETS_GUI_TITLE = ChatColor.LIGHT_PURPLE + "Compagnons";
 
+    private CosmeticsGUI() {
+        throw new IllegalStateException("This class should not be instantiated");
+    }
 
     public static void openCosmeticsGUI(Player player){
 

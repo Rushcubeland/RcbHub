@@ -22,11 +22,11 @@ import java.util.TimeZone;
 
 public class StatsGUI {
 
+    private static final Map<Player, Inventory> GUI = new HashMap<>();
+
     private StatsGUI() {
         throw new IllegalStateException("This class should not be instantiated");
     }
-
-    private static final Map<Player, Inventory> GUI = new HashMap<>();
 
     public static void openInv(Player player){
 
@@ -35,7 +35,7 @@ public class StatsGUI {
         RcbAPI.getInstance().getAccount(player, result -> {
             final ItemStack headp;
             Account account = (Account) result;
-            if(account.getRank().getPrefix().equals(RankUnit.JOUEUR.getPrefix())){
+            if(account.getRank().equals(RankUnit.JOUEUR)){
                 headp = new ItemBuilder(Material.PLAYER_HEAD).setName(ChatColor.GOLD + "Informations:").setLore(" ", ChatColor.WHITE + "Grade: " + ChatColor.GRAY + "[Joueur]" , ChatColor.WHITE + "Coins: " + ChatColor.RED + account.getCoins() + " " + ChatColor.YELLOW + "⛁", ChatColor.WHITE + "Palier Pass de combat: " + ChatColor.GREEN + "14", "  ", ChatColor.GREEN + "Plus d'avantages ?", ChatColor.YELLOW + "https://store.rushcubeland.fr").toItemStack();
             }
             else
